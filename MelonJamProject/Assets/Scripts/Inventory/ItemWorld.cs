@@ -24,7 +24,7 @@ public class ItemWorld : MonoBehaviour
 
     public void SetItem(Item item)
     {
-        this._item = item; 
+        _item = item; 
         _spriteRenderer.sprite = item.GetSprite();
     }
 
