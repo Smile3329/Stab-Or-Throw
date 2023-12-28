@@ -7,6 +7,8 @@ public class Item : MonoBehaviour
     public enum ItemType
     {
         DamagePotion,
+        IcePotion,
+        HealthPotion,
     } 
     
     public ItemType _itemType;
@@ -18,6 +20,8 @@ public class Item : MonoBehaviour
         {
             default:
             case ItemType.DamagePotion: return ItemAssets.Instance._damagePotionSprite;
+            case ItemType.IcePotion: return ItemAssets.Instance._icePotionSprite;
+            case ItemType.HealthPotion: return ItemAssets.Instance._healthPotionSprite;
         }
     }
 }

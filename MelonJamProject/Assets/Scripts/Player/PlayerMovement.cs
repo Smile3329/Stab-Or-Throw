@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Progress;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputActionReference _moveInputX;
     [SerializeField] private InputActionReference _moveInputY;
     [Space]
-    [SerializeField] private AudioSource _pickupSound;
+
+    [SerializeField] private AudioSource _pickupPotionSound;
     [SerializeField] private float walkSpeed = 2f;
 
     [SerializeField] UI_Inventory _UI_inventory;
@@ -29,9 +31,6 @@ public class PlayerMovement : MonoBehaviour
         _inventory = new Invenetory();
 
         _UI_inventory.SetInventory(_inventory);
-
-        ItemWorld.SpawnItemWorld(new Vector3(10, 20), new Item{_itemType = Item.ItemType.DamagePotion });
-        ItemWorld.SpawnItemWorld(new Vector3(20, 20), new Item{_itemType = Item.ItemType.DamagePotion });
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,9 +38,10 @@ public class PlayerMovement : MonoBehaviour
         ItemWorld itemWorld = collision.gameObject.GetComponent<ItemWorld>();
         if (itemWorld != null)
         {
-            _inventory.AddItem(new Item { _itemType = Item.ItemType.DamagePotion });
+            _inventory.AddItem(new Item { _itemType = itemWorld._item._itemType });
             _UI_inventory.RefreshInventoryItems();
             itemWorld.DestroySelf();
+            PickupPotionSound();
         }
     }
 
@@ -65,8 +65,8 @@ public class PlayerMovement : MonoBehaviour
         _rb.velocity = new Vector2(_rb.velocity.x, _moveVector.y * speed);
     }
 
-    public void PickupSound()
+    public void PickupPotionSound()
     {
-        _pickupSound.Play();
+        _pickupPotionSound.Play();
     }
 }
