@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    //TODO: Enemy types
     [SerializeField] private float damage;
     public float health {get; private set;}
 

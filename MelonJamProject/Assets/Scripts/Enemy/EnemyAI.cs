@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    //TODO: Enemy AI for different enemy types
     [SerializeField] private float enemyRadarRadius = 3;
     [SerializeField] private float enemyIdleRadius = 3;
     private Transform player;
