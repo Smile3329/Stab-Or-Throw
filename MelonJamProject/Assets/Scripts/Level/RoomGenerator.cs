@@ -2,27 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelGenerator : MonoBehaviour
+public class RoomGenerator : MonoBehaviour
 {
     // public int levelsPassed = 0;
+    [Header("Values")]
+
+    [Tooltip("More value - more narrow level is\nLess value - less narrow level is")] 
+    [Range(1, 10)]
+    [SerializeField] private int narrowityLevel = 4;
 
     [Header("References")]
     [SerializeField] private Room roomPrefab;
     [SerializeField] private Room firstRoom;
-    // [SerializeField] private GameObject doorPrefab;
-    // [SerializeField] private GameObject wallPrefab;
     
+    public static RoomGenerator instance {get; private set;}
     private List<Room> createdRooms = new List<Room>();
     private List<Room> unclosedRooms = new List<Room>();
     private Room currentRoom;
 
     private int roomCount;
 
+    private void Awake() {
+        instance = this;
+    }
+
     private void Start() {
         InitFirstRoom();
         InitRoomCount();
-        
-        GenerateRooms();
     }
 
     private void InitFirstRoom() {
@@ -32,10 +38,10 @@ public class LevelGenerator : MonoBehaviour
 
     private void InitRoomCount() {
         // roomCount = Random.Range(5 + levelsPassed, 10 + 2 * levelsPassed);
-        roomCount = 6;
+        roomCount = 12;
     }
 
-    private void GenerateRooms() {
+    public List<Room> GenerateRooms() {
         while (createdRooms.Count <= roomCount) {
             currentRoom = unclosedRooms[Random.Range(0, unclosedRooms.Count-1)];
             unclosedRooms.Remove(currentRoom);
@@ -45,7 +51,7 @@ public class LevelGenerator : MonoBehaviour
             int createdRoomsBefore = createdRooms.Count;
 
             foreach (Vector2 side in availableSides) {
-                if (Random.Range(0, 4) == 0) {     
+                if (Random.Range(0, narrowityLevel) == 0) {     
                     CreateRoom(side);
                 }
             }
@@ -55,10 +61,10 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
-        GenerateDoors();
+        return createdRooms;
     }
 
-    private void GenerateDoors() {
+    public void GenerateDoors() {
         foreach (Room room in createdRooms) {
             room.GenerateDoor();
         }
@@ -70,5 +76,6 @@ public class LevelGenerator : MonoBehaviour
         Room room = Instantiate(roomPrefab.gameObject, position + currentRoom.transform.position, Quaternion.identity).GetComponent<Room>();
         createdRooms.Add(room);
         unclosedRooms.Add(room);
+        room.transform.parent = transform;
     }
 }
