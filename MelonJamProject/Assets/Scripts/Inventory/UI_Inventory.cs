@@ -43,8 +43,8 @@ public class UI_Inventory : MonoBehaviour
             itemSlotRectTransform.gameObject.SetActive(true);
 
             itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);
-            Image image = itemSlotRectTransform.Find("image").GetComponent<Image>();
-            image.sprite = item.GetSprite();
+            Image image = itemSlotRectTransform.transform.Find("image").GetComponent<Image>();
+            image.sprite = item.GetSprite();          
 
             x++;
             if (x >= 3)

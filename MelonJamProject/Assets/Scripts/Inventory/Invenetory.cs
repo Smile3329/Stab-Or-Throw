@@ -13,7 +13,10 @@ public class Invenetory
 
     public void AddItem(Item item)
     {
-        itemList.Add(item);
+        if (itemList.Count < 6)
+        {
+            itemList.Add(item);
+        }
     }
 
     public List<Item> GetItemsList()

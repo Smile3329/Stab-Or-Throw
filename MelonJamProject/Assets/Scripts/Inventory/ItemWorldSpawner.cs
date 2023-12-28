@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ItemWorldSpawner : MonoBehaviour
 {
+    [SerializeField] private Item.ItemType _itemType;
+
     private bool _isSpawned()
     {
         int childCount = transform.childCount;
@@ -26,7 +28,7 @@ public class ItemWorldSpawner : MonoBehaviour
     {
         if (!_isSpawned())
         {
-            ItemWorld itemWorld = ItemWorld.SpawnItemWorld(this.transform.position, new Item { _itemType = Item.ItemType.DamagePotion });
+            ItemWorld itemWorld = ItemWorld.SpawnItemWorld(this.transform.position, new Item { _itemType = _itemType });
             itemWorld.transform.parent = transform;
         }
         yield return new WaitForSeconds(5f);
