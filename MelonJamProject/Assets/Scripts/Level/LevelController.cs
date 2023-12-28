@@ -15,6 +15,7 @@ public class LevelController : MonoBehaviour
         List<Room> generatedRooms = RoomGenerator.instance.GenerateRooms();
         RoomGenerator.instance.GenerateDoors();
         
+        ObstacleGenerator.instance.GenerateObstacles(generatedRooms);
         EnemyGenerator.instance.GenerateEnemies(generatedRooms);
     }
 }
