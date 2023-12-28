@@ -21,17 +21,17 @@ public class PlayerMovement : MonoBehaviour
 
     private Invenetory _inventory;
 
-    private void Awake()
+    private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
 
         _inventory = new Invenetory();
+
         _UI_inventory.SetInventory(_inventory);
 
-        ItemWorld.SpawnItemWorld(new Vector3(10, 20), new Item{ _itemType = Item.ItemType.DamagePotion });
-        ItemWorld.SpawnItemWorld(new Vector3(20, 20), new Item{ _itemType = Item.ItemType.DamagePotion });
-        ItemWorld.SpawnItemWorld(new Vector3(30, 10), new Item{ _itemType = Item.ItemType.DamagePotion });
+        ItemWorld.SpawnItemWorld(new Vector3(10, 20), new Item{_itemType = Item.ItemType.DamagePotion });
+        ItemWorld.SpawnItemWorld(new Vector3(20, 20), new Item{_itemType = Item.ItemType.DamagePotion });
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
