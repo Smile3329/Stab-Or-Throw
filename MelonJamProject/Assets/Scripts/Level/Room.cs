@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public Vector2 sizes;
+    public Vector2 sizes {get; private set;}
 
     [SerializeField] private GameObject doorPrefab;
 
