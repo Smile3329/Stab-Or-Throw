@@ -17,6 +17,7 @@ public class UI_Inventory : MonoBehaviour
         _itemSlotContainer = transform.Find("ItemSlotContainer");
         _itemSlotTemplate = _itemSlotContainer.Find("itemSlotTemplate");
     }
+
     public void SetInventory(Invenetory inventory)
     {
         _inventory = inventory;
@@ -24,13 +25,14 @@ public class UI_Inventory : MonoBehaviour
     }
 
     public void RefreshInventoryItems()
-    {       
-        foreach (Transform child in _itemSlotContainer) 
-        {
+    {   
+        
+        foreach (Transform child in _itemSlotContainer) { 
             if (child == _itemSlotTemplate) continue;
             Destroy(child.gameObject);
         }
         
+
         int x = 0;
         int y = 0;
         float itemSlotCellSize = 200f;
