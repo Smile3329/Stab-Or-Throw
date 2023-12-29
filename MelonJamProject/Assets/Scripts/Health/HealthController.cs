@@ -7,12 +7,16 @@ public class HealthController : MonoBehaviour
 {
     public float health = 10;
     public Slider slider;
+    public HealthBar healthBar;
     private GameObject script;
 
     public void InitScript(GameObject script) {
         this.script = script;
         if (slider != null) {
             slider.maxValue = health;
+        }
+        if (healthBar != null) {
+            healthBar.SetMaxValue(health);
         }
     }
 
@@ -23,6 +27,9 @@ public class HealthController : MonoBehaviour
         }
         if (slider != null) {
             slider.value = Mathf.Lerp(slider.value, health, Time.deltaTime*4);
+        }
+        if (healthBar != null) {
+            healthBar.ChangeValue(Mathf.Lerp(healthBar.value, health, Time.deltaTime*4));
         }
     }
 
