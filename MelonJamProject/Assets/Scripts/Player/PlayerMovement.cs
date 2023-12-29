@@ -53,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
         _moveVector.y = _moveInputY.action.ReadValue<float>();
 
         Move(walkSpeed);
+            
         Reflect();
 
         _anim.SetFloat("Horizontal", _moveVector.x);
@@ -63,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move(float speed)
     {
-        _anim.SetFloat("moveX", Mathf.Abs(_moveVector.x));
+        // _anim.SetFloat("moveX", Mathf.Abs(_moveVector.x));
         _rb.velocity = new Vector2(_moveVector.x * speed, _rb.velocity.y);
         _rb.velocity = new Vector2(_rb.velocity.x, _moveVector.y * speed);
         //_rb.AddForce(new Vector2(_moveVector.x * speed, 0), ForceMode2D.Impulse);
