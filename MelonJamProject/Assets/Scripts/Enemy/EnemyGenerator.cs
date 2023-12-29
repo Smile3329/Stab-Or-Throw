@@ -25,6 +25,7 @@ public class EnemyGenerator : MonoBehaviour
                 spawnPosition = spawnPosition/2 + room.transform.position;
                 GameObject obj = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
                 obj.transform.parent = transform;
+                obj.GetComponent<EnemyAI>().SetRoom(room);
             }
         }
     }

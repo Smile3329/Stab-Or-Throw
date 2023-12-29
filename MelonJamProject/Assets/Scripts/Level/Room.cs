@@ -5,6 +5,7 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     public Vector2 sizes {get; private set;}
+    public bool playerInRoom {get; private set;} = false;
 
     [SerializeField] private GameObject doorPrefab;
 
@@ -93,6 +94,18 @@ public class Room : MonoBehaviour
             GameObject obj = Instantiate(doorPrefab, position, Quaternion.identity);
             obj.transform.parent = transform;
             obj.transform.right = side;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Player")) {
+            playerInRoom = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if (other.CompareTag("Player")) {
+            playerInRoom = false;
         }
     }
 }
