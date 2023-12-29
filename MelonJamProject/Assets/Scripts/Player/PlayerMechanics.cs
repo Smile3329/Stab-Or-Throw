@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMechanics : MonoBehaviour
 {
+    
+
     private void Start() {
         GetComponent<HealthController>().InitScript(gameObject);
     }
@@ -13,4 +15,6 @@ public class PlayerMechanics : MonoBehaviour
         // animation
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+
 }

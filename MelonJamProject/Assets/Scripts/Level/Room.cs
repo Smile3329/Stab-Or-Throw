@@ -7,12 +7,8 @@ public class Room : MonoBehaviour
     [SerializeField] private GameObject doorPrefab;
     [SerializeField] private GameObject minimapIcon;
 
-    public Vector2 sizes {get; private set;}
+    public Vector2 sizes;
     public bool playerInRoom {get; private set;} = false;
-
-    private void Awake() {
-        sizes = transform.TransformVector(Vector2.one);
-    }
 
     public List<Vector2> GetAvailableSides() {
         List<Vector2> openSides = new List<Vector2>();

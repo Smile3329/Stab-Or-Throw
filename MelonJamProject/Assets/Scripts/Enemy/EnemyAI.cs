@@ -40,6 +40,8 @@ public class EnemyAI : MonoBehaviour
                 timer = 0;
             }
         }
+
+        transform.GetChild(0).gameObject.SetActive(linkedRoom.playerInRoom);
     }
 
     private IEnumerator Idle() {

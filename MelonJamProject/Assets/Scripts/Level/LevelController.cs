@@ -13,7 +13,7 @@ public class LevelController : MonoBehaviour
     void Start()
     {
         List<Room> generatedRooms = RoomGenerator.instance.GenerateRooms();
-        RoomGenerator.instance.GenerateDoors();
+        // RoomGenerator.instance.GenerateDoors();
         
         ObstacleGenerator.instance.GenerateObstacles(generatedRooms);
         EnemyGenerator.instance.GenerateEnemies(generatedRooms);
