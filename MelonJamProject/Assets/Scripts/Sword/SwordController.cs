@@ -11,7 +11,7 @@ public class SwordController : MonoBehaviour
     [SerializeField] private float damage;
     [SerializeField] private float swordTime;
     [SerializeField] private float attackCooldown;
-    private bool hasSword = true;
+    private bool hasSword = false;
     private float timer;
     private bool onCooldown = false;
 
@@ -32,23 +32,32 @@ public class SwordController : MonoBehaviour
             }
             transform.localScale = scale;
 
-            // timer += Time.deltaTime;
+            timer += Time.deltaTime;
 
             if (Input.GetMouseButtonDown(1)) {
                 Attack();
             }
         } else if (timer > swordTime) {
-            timer = 0;
+            hasSword = false;
+            transform.GetChild(0).gameObject.SetActive(hasSword);
         }
     }
 
+    public void ActivateSword() {
+        hasSword = true;
+        transform.GetChild(0).gameObject.SetActive(hasSword);
+        timer = 0;
+    }
+
     private void Attack() {
-        GetComponentInChildren<Animator>().SetTrigger("Attack");
-        foreach (Collider2D collider in Physics2D.OverlapCircleAll(circleOrigin.position, radius)) {
-            if (collider.CompareTag("Enemy") && !onCooldown) {
-                collider.GetComponent<HealthController>().health -= damage;
-                onCooldown = true;
-                StartCoroutine(Cooldown());
+        if (!onCooldown) {
+            GetComponentInChildren<Animator>().SetTrigger("Attack");
+            foreach (Collider2D collider in Physics2D.OverlapCircleAll(circleOrigin.position, radius)) {
+                if (collider.CompareTag("Enemy")) {
+                    collider.GetComponent<HealthController>().health -= damage;
+                    onCooldown = true;
+                    StartCoroutine(Cooldown());
+                }
             }
         }
     }

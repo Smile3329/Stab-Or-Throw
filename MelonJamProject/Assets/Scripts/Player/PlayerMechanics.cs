@@ -16,5 +16,10 @@ public class PlayerMechanics : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Sword")) {
+            GetComponentInChildren<SwordController>().ActivateSword();
+            Destroy(other.gameObject);
+        }
+    }
 }
