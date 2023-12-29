@@ -59,10 +59,10 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
+  m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: a20b7e6879273144d892871f489ac6ff, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 1279daeeefe4e4d43a5431bd4319bc8b, type: 2}
 --- !u!114 &1085352255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30061a8ad0941094baa2a1f90df822d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizes: {x: 6.472618, y: 3.0501}
   doorPrefab: {fileID: 3416693040596984090, guid: 55a5e63421c7fc94bbee598fb64be6c3, type: 3}
 --- !u!61 &8904320036900247554
 BoxCollider2D:
