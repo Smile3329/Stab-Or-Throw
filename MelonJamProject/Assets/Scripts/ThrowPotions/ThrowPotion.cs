@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ThrowPotion : MonoBehaviour
 {
+    [SerializeField] private float _throwPotionForce;
+
     [SerializeField] private Transform _playerTransform;
 
     [SerializeField] GameObject _throwPotionGameobject;
@@ -14,7 +16,7 @@ public class ThrowPotion : MonoBehaviour
 
     private bool _potionAim;
 
-    public GameObject _spawnedPotionGameObject;
+    private GameObject _spawnedPotionGameObject;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +43,7 @@ public class ThrowPotion : MonoBehaviour
         {
             if (_potionAim)
             {
-                throwPotion(10f);
+                throwPotion(_throwPotionForce);
             }
         }
     }

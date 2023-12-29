@@ -384,11 +384,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f650d189b87144ab5641bde974effb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _throwPotionForce: 4
   _playerTransform: {fileID: 1244727011}
   _throwPotionGameobject: {fileID: 7982930301080777488, guid: 279ded7bd0f014e4eb32624487cdb8b0, type: 3}
   _throwPotionSpawnPos: {fileID: 131428605}
   _canThrowPotion: 1
-  _spawnedPotionGameObject: {fileID: 0}
 --- !u!1 &873087486
 GameObject:
   m_ObjectHideFlags: 0
