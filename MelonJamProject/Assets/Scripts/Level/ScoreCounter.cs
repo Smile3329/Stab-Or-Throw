@@ -17,11 +17,11 @@ public class ScoreCounter : MonoBehaviour
 
     public void AddScore(int score) {
         this.score += score;
-        scoreText.text = "Score: " + score.ToString();
+        scoreText.text = "Score: " + this.score.ToString();
     }   
 
     public void SetScore(int score) {
         this.score = score;
-        scoreText.text = "Score: " + score.ToString();
+        scoreText.text = "Score: " + this.score.ToString();
     }   
 }
