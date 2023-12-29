@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class UI_Inventory : MonoBehaviour
 {
@@ -45,9 +46,10 @@ public class UI_Inventory : MonoBehaviour
             itemSlotRectTransform.gameObject.SetActive(true);
 
             itemSlotRectTransform.GetComponent<Button>().onClick.AddListener(delegate () {
-                _inventory.RemoveItem(item);
-                RefreshInventoryItems();
                 _throwPotion.PotionAim(item, itemSlotRectTransform.transform.Find("image").GetComponent<Image>());
+                _inventory.RemoveItem(item);
+                //_inventory.UseItem(item);
+                RefreshInventoryItems();
             });
 
             itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);

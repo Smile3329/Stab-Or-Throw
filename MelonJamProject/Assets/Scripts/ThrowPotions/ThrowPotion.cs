@@ -13,6 +13,7 @@ public class ThrowPotion : MonoBehaviour
     [SerializeField] GameObject _throwPotionGameobject;
     [SerializeField] Transform _throwPotionSpawnPos;
 
+
     public bool _canThrowPotion;
 
     private bool _potionAim;
@@ -59,7 +60,7 @@ public class ThrowPotion : MonoBehaviour
 
             _spawnedPotionGameObject.GetComponent<SpriteRenderer>().sprite = image.sprite;
 
-            _spawnedPotionGameObject.transform.GetChild(1).GetComponent<PotionExplodeScript>().item = item;
+            _spawnedPotionGameObject.transform.GetChild(1).GetComponent<PotionExplodeScript>().SetItem(item);
 
             _potionAim = true;
 
@@ -73,9 +74,13 @@ public class ThrowPotion : MonoBehaviour
 
         //_spawnedPotionGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
 
-        _spawnedPotionGameObject.GetComponent<Rigidbody2D>().velocity = _spawnedPotionGameObject.transform.up * throwForce;
+        //_spawnedPotionGameObject.GetComponent<Rigidbody2D>().velocity = _spawnedPotionGameObject.transform.up * throwForce;
+
+        _spawnedPotionGameObject.GetComponent<Rigidbody2D>().AddForce(_spawnedPotionGameObject.transform.up * throwForce, ForceMode2D.Impulse);
 
         _spawnedPotionGameObject.transform.GetChild(1).GetComponent<Collider2D>().enabled = true;
+
+        _spawnedPotionGameObject.transform.GetChild(1).GetComponent<PotionExplodeScript>().DefaultCrashPotion();
 
         _spawnedPotionGameObject.transform.parent = null;
 

@@ -91,4 +91,17 @@ public class EnemyAI : MonoBehaviour
             StartCoroutine(Attack(other.transform.GetComponent<HealthController>()));
         }
     }
+
+    public IEnumerator FreezeEnemy(float freezTime)
+    {
+        float enemySpeed = agent.speed;
+        agent.speed = 0;
+        yield return new WaitForSeconds(freezTime);
+        agent.speed = enemySpeed;
+    }
+
+    public void StartFreezeEnemy(float freeztime)
+    {
+        StartCoroutine(FreezeEnemy(freeztime));
+    }
 }

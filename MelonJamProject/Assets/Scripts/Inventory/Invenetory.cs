@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,11 @@ using UnityEngine;
 public class Invenetory
 {
     private List<Item> itemList;
+    private Action<Item> useItemAction;
 
-    public Invenetory()
+    public Invenetory(Action<Item> useItemAction)
     {
+        this.useItemAction = useItemAction;
         itemList = new List<Item>();
     }
 
@@ -27,5 +30,10 @@ public class Invenetory
     public List<Item> GetItemsList()
     {
         return itemList;
+    }
+
+    public void UseItem(Item item)
+    {
+        useItemAction(item);
     }
 }

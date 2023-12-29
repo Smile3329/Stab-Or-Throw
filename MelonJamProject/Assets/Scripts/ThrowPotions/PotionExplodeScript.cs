@@ -4,49 +4,49 @@ using UnityEngine;
 
 public class PotionExplodeScript : MonoBehaviour
 {
-    public Item item;
+    [SerializeField] private float _icePotionFreezeTimeEnemy = 3f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] float _timeToDestroy;
+
+    public Item _item;
 
     public void ExplodePotionWall()
     {
-        switch (item._itemType)
+        switch (_item._itemType)
         {
             default:
             case Item.ItemType.DamagePotion:
-                DestroyPotion(2f);
+                DestroyPotion(1);
                 break;
 
             case Item.ItemType.IcePotion:
-                DestroyPotion(2f);
+                DestroyPotion(0);
                 break;
 
             case Item.ItemType.HealthPotion:
-                DestroyPotion(2f);
+                DestroyPotion(1);
                 break;
         }
     }
 
-    public void ExplodePotionEnemy(HealthController healthController)
+    public void ExplodePotionEnemy(HealthController healthController, Collider2D enemy)
     {
-        switch (item._itemType)
+        switch (_item._itemType)
         {
             default:
             case Item.ItemType.DamagePotion:
                 healthController.health--;
-                DestroyPotion(2f);
+                DestroyPotion(1f);
                 break;
 
             case Item.ItemType.IcePotion:
-                DestroyPotion(2f);
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SoundManager>().IcePotionCrashSound();
+                enemy.transform.GetComponent<EnemyAI>().StartFreezeEnemy(_icePotionFreezeTimeEnemy);
+                DestroyPotion(0);
                 break;
 
             case Item.ItemType.HealthPotion:
-                DestroyPotion(2f);
+                DestroyPotion(1f);
                 break;
         }
     }
@@ -60,7 +60,7 @@ public class PotionExplodeScript : MonoBehaviour
 
         if (collision.tag == "Enemy")
         {
-            ExplodePotionEnemy(collision.GetComponent<HealthController>());     
+            ExplodePotionEnemy(collision.GetComponent<HealthController>(), collision);     
         }
     }
 
@@ -73,12 +73,22 @@ public class PotionExplodeScript : MonoBehaviour
 
         if (collision.tag == "Enemy")
         {
-            ExplodePotionEnemy(collision.GetComponent<HealthController>());
+            ExplodePotionEnemy(collision.GetComponent<HealthController>(), collision);
         }
     }
 
     public void DestroyPotion(float time)
     {
         Destroy(transform.parent.gameObject, time);
+    }
+
+    public void DefaultCrashPotion()
+    {
+        DestroyPotion(_timeToDestroy);
+    }
+    
+    public void SetItem(Item item)
+    {
+        _item = item;
     }
 }
