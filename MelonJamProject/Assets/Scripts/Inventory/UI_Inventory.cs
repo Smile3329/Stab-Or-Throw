@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class UI_Inventory : MonoBehaviour
 {
+    [SerializeField] ThrowPotion _throwPotion;
+
     private Invenetory _inventory;
 
     private Transform _itemSlotContainer;
@@ -41,6 +43,12 @@ public class UI_Inventory : MonoBehaviour
         {
             RectTransform itemSlotRectTransform = Instantiate(_itemSlotTemplate, _itemSlotContainer).GetComponent<RectTransform>();
             itemSlotRectTransform.gameObject.SetActive(true);
+
+            itemSlotRectTransform.GetComponent<Button>().onClick.AddListener(delegate () {
+                _inventory.RemoveItem(item);
+                RefreshInventoryItems();
+                _throwPotion.PotionAim(item, itemSlotRectTransform.transform.Find("image").GetComponent<Image>());
+            });
 
             itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);
             Image image = itemSlotRectTransform.transform.Find("image").GetComponent<Image>();

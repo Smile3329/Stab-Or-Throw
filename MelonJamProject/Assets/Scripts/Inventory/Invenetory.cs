@@ -19,6 +19,11 @@ public class Invenetory
         }
     }
 
+    public void RemoveItem(Item item)
+    {
+        itemList.Remove(item);
+    }
+
     public List<Item> GetItemsList()
     {
         return itemList;
