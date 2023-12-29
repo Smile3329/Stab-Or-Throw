@@ -393,6 +393,12 @@ MonoBehaviour:
   _moveInputX: {fileID: -7938441086750783035, guid: 8fb7a05025b42d24e819515713b871b7, type: 3}
   _moveInputY: {fileID: -6168465564059101318, guid: 8fb7a05025b42d24e819515713b871b7, type: 3}
   _pickupPotionSound: {fileID: 6069978518434513708}
+  _footSteps:
+  - {fileID: 2021192467261289483}
+  - {fileID: 1191874331309907247}
+  - {fileID: 8448959611450211088}
+  minTimeBetweenFootsteps: 0.3
+  maxTimeBetweenFootsteps: 0.6
   walkSpeed: 5
   _UI_inventory: {fileID: 0}
 --- !u!95 &1167840363814821180
@@ -552,6 +558,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8427446725645261302}
+  - {fileID: 2052743231905949048}
+  - {fileID: 8188071998648401802}
+  - {fileID: 2808033468111157144}
   m_Father: {fileID: 6999056661635288504}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

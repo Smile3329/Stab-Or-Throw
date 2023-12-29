@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class HealthController : MonoBehaviour
 {
+    [SerializeField] private bool _itsPlayer;
+
     public float health = 10;
     public Slider slider;
     public HealthBar healthBar;
@@ -23,6 +25,14 @@ public class HealthController : MonoBehaviour
     void Update()
     {
         if (health <= 0) {
+            if (_itsPlayer)
+            {
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SoundManager>().PlayerDieSound();
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SoundManager>().EnemyDieSound();
+            }
             script.SendMessage("Die");
 
             if (healthBar != null) {

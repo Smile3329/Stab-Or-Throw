@@ -12,7 +12,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputActionReference _moveInputY;
     [Space]
 
+    [Header("Sfx")]
     [SerializeField] private AudioSource _pickupPotionSound;
+    [SerializeField] private List<AudioSource> _footSteps;
+
+    [SerializeField] float minTimeBetweenFootsteps = 0.3f; // Minimum time between footstep sounds
+    [SerializeField] float maxTimeBetweenFootsteps = 0.6f; // Maximum time between footstep sounds
+    private float timeSinceLastFootstep; // Time since the last footstep sound
+
     [SerializeField] private float walkSpeed = 2f;
 
     [SerializeField] UI_Inventory _UI_inventory;
@@ -30,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
 
-        _inventory = new Invenetory();
+        _inventory = new Invenetory(UseItem);
 
         _UI_inventory.SetInventory(_inventory);
     }
@@ -47,6 +54,25 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void UseItem(Item item)
+    {
+        switch (item._itemType)
+        {
+            default:
+            case Item.ItemType.DamagePotion:
+                _inventory.RemoveItem(new Item { _itemType = Item.ItemType.DamagePotion });
+                break;
+
+            case Item.ItemType.IcePotion:
+                _inventory.RemoveItem(new Item { _itemType = Item.ItemType.IcePotion });
+                break;
+
+            case Item.ItemType.HealthPotion:
+                _inventory.RemoveItem(new Item { _itemType = Item.ItemType.HealthPotion });
+                break;
+        }
+    }
+
     private void Update()
     {
         _moveVector.x = _moveInputX.action.ReadValue<float>();
@@ -60,6 +86,18 @@ public class PlayerMovement : MonoBehaviour
         _anim.SetFloat("Vertical", _moveVector.y);
         _anim.SetFloat("Speed", _moveVector.sqrMagnitude);
 
+        if (_moveVector.sqrMagnitude > 0)
+        {
+            //_footSteps[Random.Range(0, _footSteps.Count)].Play();
+
+            if (Time.time - timeSinceLastFootstep >= Random.Range(minTimeBetweenFootsteps, maxTimeBetweenFootsteps))
+            {
+                // Play a random footstep sound from the array
+                _footSteps[Random.Range(0, _footSteps.Count)].Play();
+
+                timeSinceLastFootstep = Time.time; // Update the time since the last footstep sound
+            }
+        }
     }
 
     private void Move(float speed)
