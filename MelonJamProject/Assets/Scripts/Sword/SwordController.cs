@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class SwordController : MonoBehaviour
 {
-    [SerializeField] private GameObject swordPrefab;
+    [Header("References")]
+    [SerializeField] private Transform circleOrigin;
+    [Header("Values")]
+    [SerializeField] private float radius;
+    [SerializeField] private float damage;
+    [SerializeField] private float swordTime;
+    [SerializeField] private float attackCooldown;
     private bool hasSword = true;
-    private SpriteRenderer weaponRenderer;
-    private SpriteRenderer characterRenderer;
     private float timer;
-    private float swordTime;
+    private bool onCooldown = false;
 
     void Update()
     {
@@ -17,25 +21,40 @@ public class SwordController : MonoBehaviour
             Vector2 mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-            Vector2 right = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
-            transform.right = Vector3.Lerp(transform.right, right, Time.deltaTime * 7);
+            mousePosition = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
+            transform.right = Vector3.Lerp(transform.right, mousePosition, Time.deltaTime * 7);
 
             Vector2 scale = transform.localScale;
-            scale.y = 1 * Mathf.Sign(mousePosition.x);
+            if (Mathf.Abs(transform.eulerAngles.z-180) < 90) {
+                scale.y = -1;
+            } else {
+                scale.y = 1;
+            }
             transform.localScale = scale;
 
-            timer += Time.deltaTime;
+            // timer += Time.deltaTime;
 
             if (Input.GetMouseButtonDown(1)) {
-
+                Attack();
             }
-
         } else if (timer > swordTime) {
             timer = 0;
         }
     }
 
     private void Attack() {
-        
+        GetComponentInChildren<Animator>().SetTrigger("Attack");
+        foreach (Collider2D collider in Physics2D.OverlapCircleAll(circleOrigin.position, radius)) {
+            if (collider.CompareTag("Enemy") && !onCooldown) {
+                collider.GetComponent<HealthController>().health -= damage;
+                onCooldown = true;
+                StartCoroutine(Cooldown());
+            }
+        }
+    }
+
+    private IEnumerator Cooldown() {
+        yield return new WaitForSeconds(attackCooldown);
+        onCooldown = false;
     }
 }
