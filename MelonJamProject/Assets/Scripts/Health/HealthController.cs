@@ -24,6 +24,10 @@ public class HealthController : MonoBehaviour
     {
         if (health <= 0) {
             script.SendMessage("Die");
+
+            if (healthBar != null) {
+                ScoreCounter.instance.AddScore(10);
+            }
         }
         if (slider != null) {
             slider.value = Mathf.Lerp(slider.value, health, Time.deltaTime*4);

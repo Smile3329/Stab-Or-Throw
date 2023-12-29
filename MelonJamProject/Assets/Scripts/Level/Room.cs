@@ -7,7 +7,7 @@ public class Room : MonoBehaviour
     [SerializeField] private GameObject doorPrefab;
     [SerializeField] private GameObject minimapIcon;
 
-    public Vector2 sizes;
+    public Vector2Int sizes;
     public bool playerInRoom {get; private set;} = false;
 
     public List<Vector2> GetAvailableSides() {
