@@ -24,6 +24,12 @@ public class HealthController : MonoBehaviour
 
     void Update()
     {
+        if (slider != null) {
+            slider.value = Mathf.Lerp(slider.value, health, Time.deltaTime*4);
+        }
+        if (healthBar != null) {
+            healthBar.ChangeValue(Mathf.Lerp(healthBar.value, health, Time.deltaTime*4));
+        }
         if (health <= 0) {
             if (_itsPlayer)
             {
@@ -33,17 +39,14 @@ public class HealthController : MonoBehaviour
             {
                 GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SoundManager>().EnemyDieSound();
             }
+
             script.SendMessage("Die");
 
             if (healthBar != null) {
                 ScoreCounter.instance.AddScore(10);
             }
-        }
-        if (slider != null) {
-            slider.value = Mathf.Lerp(slider.value, health, Time.deltaTime*4);
-        }
-        if (healthBar != null) {
-            healthBar.ChangeValue(Mathf.Lerp(healthBar.value, health, Time.deltaTime*4));
+
+            this.enabled = false;
         }
     }
 
