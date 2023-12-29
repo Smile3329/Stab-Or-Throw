@@ -63,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
         //_anim.SetFloat("moveX", Mathf.Abs(_MoveVector.x));
         _rb.velocity = new Vector2(_moveVector.x * speed, _rb.velocity.y);
         _rb.velocity = new Vector2(_rb.velocity.x, _moveVector.y * speed);
+        //_rb.AddForce(new Vector2(_moveVector.x * speed, 0), ForceMode2D.Impulse);
+        //_rb.AddForce(new Vector2(0, _moveVector.y * speed), ForceMode2D.Impulse);
     }
 
     public void PickupPotionSound()
