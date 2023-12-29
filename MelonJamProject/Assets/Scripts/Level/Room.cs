@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
+    [SerializeField] private GameObject doorPrefab;
+    [SerializeField] private GameObject minimapIcon;
+
     public Vector2 sizes {get; private set;}
     public bool playerInRoom {get; private set;} = false;
-
-    [SerializeField] private GameObject doorPrefab;
 
     private void Awake() {
         sizes = transform.TransformVector(Vector2.one);
@@ -100,6 +101,7 @@ public class Room : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
             playerInRoom = true;
+            minimapIcon.SetActive(true);
         }
     }
 
