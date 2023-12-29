@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Invenetory _inventory;
 
+    private bool faceRight = true;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -51,20 +53,39 @@ public class PlayerMovement : MonoBehaviour
         _moveVector.y = _moveInputY.action.ReadValue<float>();
 
         Move(walkSpeed);
+        Reflect();
 
-        //_anim.SetFloat("Horizontal", _moveVector.x);
-        //_anim.SetFloat("Vertical", _moveVector.y);
-        //_anim.SetFloat("Speed", _moveVector.sqrMagnitude);
+        _anim.SetFloat("Horizontal", _moveVector.x);
+        _anim.SetFloat("Vertical", _moveVector.y);
+        _anim.SetFloat("Speed", _moveVector.sqrMagnitude);
 
     }
 
     private void Move(float speed)
     {
-        //_anim.SetFloat("moveX", Mathf.Abs(_MoveVector.x));
+        _anim.SetFloat("moveX", Mathf.Abs(_moveVector.x));
         _rb.velocity = new Vector2(_moveVector.x * speed, _rb.velocity.y);
         _rb.velocity = new Vector2(_rb.velocity.x, _moveVector.y * speed);
         //_rb.AddForce(new Vector2(_moveVector.x * speed, 0), ForceMode2D.Impulse);
         //_rb.AddForce(new Vector2(0, _moveVector.y * speed), ForceMode2D.Impulse);
+    }
+
+    private void Reflect()
+    {
+        if ((_moveVector.x > 0 && !faceRight) || (_moveVector.x < 0 && faceRight))
+        {
+            if (faceRight)
+            {
+                GetComponent<SpriteRenderer>().flipX = true;
+            }
+
+            if (!faceRight)
+            {
+                GetComponent<SpriteRenderer>().flipX = false;
+            }
+
+            faceRight = !faceRight;
+        }
     }
 
     public void PickupPotionSound()

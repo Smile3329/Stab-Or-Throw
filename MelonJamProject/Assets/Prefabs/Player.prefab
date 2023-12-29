@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 6999056661635288454}
   - component: {fileID: 6999056661635288455}
   - component: {fileID: 6999056661635288452}
+  - component: {fileID: 1167840363814821180}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -237,7 +238,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -1084027212, guid: 4e292e19d6e09fe46a59d5978dc77a86, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8bc1937e52ae1514cb11486d2a3a02e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -261,18 +262,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.011594892, y: -0.27054724}
+  m_Offset: {x: 0.043770716, y: -0.2484011}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.56640625, y: 1.0351562}
+    oldSize: {x: 0.6666667, y: 1.1666666}
     newSize: {x: 1.1328125, y: 2.0703125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7912922, y: 1.5101748}
+  m_Size: {x: 0.4590988, y: 0.6243259}
   m_EdgeRadius: 0
 --- !u!50 &6999056661635288455
 Rigidbody2D:
@@ -312,6 +313,27 @@ MonoBehaviour:
   _pickupPotionSound: {fileID: 6069978518434513708}
   walkSpeed: 5
   _UI_inventory: {fileID: 0}
+--- !u!95 &1167840363814821180
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6999056661635288453}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d2caa8391b618684aabcb25b8aa0392d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &9133132678028977890
 GameObject:
   m_ObjectHideFlags: 0
