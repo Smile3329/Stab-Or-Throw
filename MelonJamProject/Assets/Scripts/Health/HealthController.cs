@@ -51,6 +51,13 @@ public class HealthController : MonoBehaviour
     }
 
     public void GetDamage(float damage) {
-        health -= damage;
+        if (health > 0) {
+            health -= damage;
+
+            if (_itsPlayer)
+            {
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SoundManager>().PlayerDamaged();
+            }
+        }
     }
 }

@@ -18,6 +18,7 @@ public class PotionExplodeScript : MonoBehaviour
         {
             if (_throwed)
             {
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SoundManager>().HealUsed();
                 GameObject.FindGameObjectWithTag("Player").GetComponent<HealthController>().health = 10;
                 DestroyPotion(0f);
             }
@@ -49,8 +50,8 @@ public class PotionExplodeScript : MonoBehaviour
         {
             default:
             case Item.ItemType.DamagePotion:
-                healthController.health--;
-                DestroyPotion(1f);
+                healthController.health -= 5;
+                DestroyPotion(1);
                 break;
 
             case Item.ItemType.IcePotion:
@@ -63,6 +64,7 @@ public class PotionExplodeScript : MonoBehaviour
                 DestroyPotion(1f);
                 break;
         }
+        Destroy(this);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -4,24 +4,31 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private AudioSource _EnemyDieSound;
+    [SerializeField] private AudioSource _audioSource;
 
-    [SerializeField] private AudioSource _playerDieSound;
+    [SerializeField] private List<AudioClip> _clips;
 
-    [SerializeField] private AudioSource _IcePotionCrashSound;
 
     public void EnemyDieSound()
     {
-        _EnemyDieSound.Play();
+        _audioSource.PlayOneShot(_clips[0]);
     }
 
     public void PlayerDieSound()
     {
-        _playerDieSound.Play();  
+        _audioSource.PlayOneShot(_clips[1]);
     }
 
     public void IcePotionCrashSound()
     {
-        _IcePotionCrashSound.Play();
+        _audioSource.PlayOneShot(_clips[2]);
+    }
+
+    public void HealUsed() {
+        _audioSource.PlayOneShot(_clips[3]);
+    }
+
+    public void PlayerDamaged() {
+        _audioSource.PlayOneShot(_clips[4]);
     }
 }

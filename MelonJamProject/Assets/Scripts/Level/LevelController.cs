@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,6 +7,7 @@ using UnityEngine.UI;
 public class LevelController : MonoBehaviour
 {
     [SerializeField] private GameObject ladderPrefab;
+    [SerializeField] private AudioSource musicSource;
     [Tooltip("1 - enemy\n2 - levels\n3 - score")]
     [SerializeField] private List<Text> texts;
     [SerializeField] private GameObject losePanel;
@@ -32,7 +32,10 @@ public class LevelController : MonoBehaviour
         
         ObstacleGenerator.instance.GenerateObstacles(generatedRooms);
         DecorationGenerator.instance.GenerateDecorations(generatedRooms);
+        ChestGenerator.instance.Generate(generatedRooms);
         enemyCount = EnemyGenerator.instance.GenerateEnemies(generatedRooms);
+
+        StartCoroutine(MusicVolume(false));
     }
     
     private void Update() {
@@ -54,16 +57,42 @@ public class LevelController : MonoBehaviour
     }
 
     public void PlayerDied() {
+        StartCoroutine(MusicVolume(true));
+
         losePanel.SetActive(true);
 
-        texts[0].text = "Enemy Killed " + PlayerPrefs.GetInt("EnemeyKilled");
-        texts[1].text = "Levels Passed" + PlayerPrefs.GetInt("LevelsCleared", 1);
-        texts[2].text = "Total Score" + PlayerPrefs.GetInt("TotalScore");
+        texts[0].text = "Enemy Killed: " + PlayerPrefs.GetInt("EnemeyKilled");
+        texts[1].text = "Levels Passed: " + PlayerPrefs.GetInt("LevelsCleared", 0);
+        texts[2].text = "Total Score: " + PlayerPrefs.GetInt("TotalScore");
 
         PlayerPrefs.SetFloat("RoomMultiplier", 1);
-        PlayerPrefs.SetInt("LevelsCleared", 1);
+        PlayerPrefs.SetInt("LevelsCleared", 0);
         PlayerPrefs.SetInt("EnemeyKilled", 0);
         PlayerPrefs.SetInt("TotalScore", 0);
+    }
+
+    private IEnumerator MusicVolume(bool backward) {
+        if (!backward) {
+            float time = 0;
+            musicSource.volume = 0;
+            while (time < 3) {
+                musicSource.volume = Mathf.Lerp(musicSource.volume, 1, time*Time.deltaTime);
+
+                yield return null;
+
+                time += Time.deltaTime;
+            }
+        } else {
+            float time = 0;
+            musicSource.volume = 1;
+            while (time < 3) {
+                musicSource.volume = Mathf.Lerp(musicSource.volume, 0, time*Time.deltaTime);
+                
+                yield return null;
+
+                time += Time.deltaTime;
+            }
+        }
     }
 
     public void EnemyDied() {
@@ -76,6 +105,6 @@ public class LevelController : MonoBehaviour
     }
 
     public void ToMenu() {
-        // Menu
+        SceneManager.LoadScene(0);
     }
 }

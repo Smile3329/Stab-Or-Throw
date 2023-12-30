@@ -20,6 +20,7 @@ public class EnemyGenerator : MonoBehaviour
 
     public int GenerateEnemies(List<Room> generatedRooms) {
         int enemyCountInSum = 0;
+        generatedRooms.RemoveAt(0);
         foreach (Room room in generatedRooms) {
             int enemyCount = 0;
             for (int i = 0; i < Random.Range(-1, 2*enemySpawnRate); i++) {
