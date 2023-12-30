@@ -48,7 +48,7 @@ public class UI_Inventory : MonoBehaviour
             itemSlotRectTransform.GetComponent<Button>().onClick.AddListener(delegate () {
                 _throwPotion.PotionAim(item, itemSlotRectTransform.transform.Find("image").GetComponent<Image>());
                 _inventory.RemoveItem(item);
-                //_inventory.UseItem(item);
+                // _inventory.UseItem(item);
                 RefreshInventoryItems();
             });
 
