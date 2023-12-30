@@ -78,14 +78,18 @@ public class EnemyAI : MonoBehaviour
     public void Die() {
         ScoreCounter.instance.AddScore(10);
         LevelController.instance.EnemyDied();
+        
+        attacking = true;
+        chasing = false;
+        StopAllCoroutines();
 
         anim.enabled = false;
         linkedRoom.EnemyKilled();
-        StopAllCoroutines();
+
         agent.velocity = Vector2.zero;
         // Animation of dying
         Destroy(gameObject, 2);
-        this.enabled = false;
+        enabled = false;
     }
 
     public void SetRoom(Room room) {

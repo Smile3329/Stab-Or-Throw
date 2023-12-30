@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class ThrowPotion : MonoBehaviour
 {
@@ -20,13 +19,6 @@ public class ThrowPotion : MonoBehaviour
 
     private GameObject _spawnedPotionGameObject;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (_potionAim)
@@ -77,6 +69,7 @@ public class ThrowPotion : MonoBehaviour
         //_spawnedPotionGameObject.GetComponent<Rigidbody2D>().velocity = _spawnedPotionGameObject.transform.up * throwForce;
 
         _spawnedPotionGameObject.GetComponent<Rigidbody2D>().AddForce(_spawnedPotionGameObject.transform.up * throwForce, ForceMode2D.Impulse);
+        _spawnedPotionGameObject.GetComponent<Rigidbody2D>().AddTorque(5);
 
         _spawnedPotionGameObject.transform.GetChild(1).GetComponent<Collider2D>().enabled = true;
 

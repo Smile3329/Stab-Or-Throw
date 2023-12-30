@@ -14,8 +14,7 @@ public class ItemWorld : MonoBehaviour
         return itemWorld;
     }
 
-    [SerializeField] private Item.ItemType _itemType;
-
+    public Item.ItemType _itemType;
     public Item _item;
     private SpriteRenderer _spriteRenderer;
 

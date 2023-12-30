@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 
 public class DecorationGenerator : MonoBehaviour
 {
@@ -109,7 +106,7 @@ public class DecorationGenerator : MonoBehaviour
     }
 
     private GameObject CreateGameObject(Sprite sprite) {
-        GameObject obj = Instantiate(new GameObject("Decoration (" + sprite.name + ")"));
+        GameObject obj = new GameObject("Decoration (" + sprite.name + ")");
         obj.transform.tag = "Decoration";
         SpriteRenderer renderer = obj.AddComponent<SpriteRenderer>();
         renderer.sprite = sprite;
