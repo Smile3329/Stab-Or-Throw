@@ -122,7 +122,6 @@ public class DecorationGenerator : MonoBehaviour
             Instantiate(light, obj.transform).transform.position = new Vector3(0, 0, -0.36f);
         }
 
-
         return obj;
     }
 }
