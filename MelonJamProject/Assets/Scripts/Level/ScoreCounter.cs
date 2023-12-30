@@ -12,7 +12,7 @@ public class ScoreCounter : MonoBehaviour
     
     private void Awake() {
         instance = this;
-        SetScore(0);
+        SetScore(PlayerPrefs.GetInt("TotalScore", 0));
     }
 
     public void AddScore(int score) {
@@ -23,5 +23,9 @@ public class ScoreCounter : MonoBehaviour
     public void SetScore(int score) {
         this.score = score;
         scoreText.text = "Score: " + this.score.ToString();
-    }   
+    }
+
+    public int GetScore() {
+        return score;
+    }
 }

@@ -18,7 +18,8 @@ public class EnemyGenerator : MonoBehaviour
         instance = this;
     }
 
-    public void GenerateEnemies(List<Room> generatedRooms) {
+    public int GenerateEnemies(List<Room> generatedRooms) {
+        int enemyCountInSum = 0;
         foreach (Room room in generatedRooms) {
             int enemyCount = 0;
             for (int i = 0; i < Random.Range(-1, 2*enemySpawnRate); i++) {
@@ -30,7 +31,9 @@ public class EnemyGenerator : MonoBehaviour
 
                 enemyCount++;
             }
+            enemyCountInSum += enemyCount;
             room.CreateEnemyIcon(enemyCount);
         }
+        return enemyCountInSum;
     }
 }

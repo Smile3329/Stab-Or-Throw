@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Sword
   - Room
+  - Ladder
+  - Decoration
   layers:
   - Default
   - TransparentFX

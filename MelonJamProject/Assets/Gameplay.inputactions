@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "KeyPressed",
+                    "type": "Button",
+                    "id": "6cb91a43-9ef8-4690-9058-e22a077fa586",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -90,6 +99,17 @@
                     "action": "MoveY",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "659c1eed-1ad8-4ec5-929f-2a3ad0db6b3c",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "KeyPressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
