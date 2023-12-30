@@ -6,6 +6,8 @@ public class SwordController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform circleOrigin;
+    [SerializeField] private List<AudioClip> clips;
+    [SerializeField] private AudioSource audioSource;
     [Header("Values")]
     [SerializeField] private float radius;
     [SerializeField] private float damage;
@@ -57,7 +59,12 @@ public class SwordController : MonoBehaviour
                     collider.GetComponent<HealthController>().health -= damage;
                     onCooldown = true;
                     StartCoroutine(Cooldown());
+                    audioSource.PlayOneShot(clips[0]);
                 }
+            }
+
+            if (!onCooldown) {
+                audioSource.PlayOneShot(clips[1]);
             }
         }
     }
