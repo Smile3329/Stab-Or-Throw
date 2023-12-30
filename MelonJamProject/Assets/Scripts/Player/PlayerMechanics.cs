@@ -5,14 +5,12 @@ using UnityEngine;
 public class PlayerMechanics : MonoBehaviour
 {
     [SerializeField] private Transform playerMinimapIcon;
+    [SerializeField] private AudioClip swordPick;
+    [SerializeField] private AudioSource audioSource;
     private Room room;
 
     private void Start() {
         GetComponent<HealthController>().InitScript(gameObject);
-    }
-
-    private void Update() {
-        
     }
 
     public void Die() {
@@ -23,6 +21,7 @@ public class PlayerMechanics : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Sword")) {
+            audioSource.PlayOneShot(swordPick);
             GetComponentInChildren<SwordController>().ActivateSword();
             Destroy(other.gameObject);
         }

@@ -98,4 +98,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputAction: {fileID: -2702865066712911848, guid: 8fb7a05025b42d24e819515713b871b7, type: 3}
-  radius: 2
+  radius: 0.5

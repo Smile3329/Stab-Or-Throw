@@ -2357,8 +2357,24 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3635019910612856429, guid: af15a44876624544593ab39c1f4cd2f6, type: 3}
       propertyPath: swordTime
-      value: 1000000
+      value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3635019910612856429, guid: af15a44876624544593ab39c1f4cd2f6, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 796233994}
+    - target: {fileID: 3635019910612856429, guid: af15a44876624544593ab39c1f4cd2f6, type: 3}
+      propertyPath: clips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635019910612856429, guid: af15a44876624544593ab39c1f4cd2f6, type: 3}
+      propertyPath: clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: f4144e8879fb4f443b4ba9e948c41c5e, type: 3}
+    - target: {fileID: 3635019910612856429, guid: af15a44876624544593ab39c1f4cd2f6, type: 3}
+      propertyPath: clips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 708473f8f5b5fc648937e9da21cbae3b, type: 3}
     - target: {fileID: 4090285418564504774, guid: af15a44876624544593ab39c1f4cd2f6, type: 3}
       propertyPath: m_Volume
       value: 0.8
@@ -2524,6 +2540,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMinimapIcon: {fileID: 1959966678}
+  swordPick: {fileID: 8300000, guid: c553d0495b7bbeb4fa9e6bfa4f55db86, type: 3}
+  audioSource: {fileID: 796233994}
 --- !u!114 &1215966806
 MonoBehaviour:
   m_ObjectHideFlags: 0
