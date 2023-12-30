@@ -370,7 +370,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 10
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -394,9 +394,9 @@ MonoBehaviour:
   _moveInputY: {fileID: -6168465564059101318, guid: 8fb7a05025b42d24e819515713b871b7, type: 3}
   _pickupPotionSound: {fileID: 6069978518434513708}
   _footSteps:
-  - {fileID: 2021192467261289483, guid: 00000000000000000000000000000000, type: 0}
-  - {fileID: 1191874331309907247, guid: 00000000000000000000000000000000, type: 0}
-  - {fileID: 8448959611450211088, guid: 00000000000000000000000000000000, type: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   minTimeBetweenFootsteps: 0.3
   maxTimeBetweenFootsteps: 0.6
   walkSpeed: 5

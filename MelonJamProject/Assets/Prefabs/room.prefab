@@ -1015,7 +1015,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -1818,8 +1818,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30061a8ad0941094baa2a1f90df822d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPrefab: {fileID: 3416693040596984090, guid: 55a5e63421c7fc94bbee598fb64be6c3, type: 3}
+  upDoorPrefab: {fileID: 2286009953144965279, guid: dfaf5c5c44ab1c540958875522d21a6a, type: 3}
+  rightDoorPrefab: {fileID: 1915936815019590318, guid: 626202b54e0e8634f9e202aefbd180c2, type: 3}
   minimapIcon: {fileID: 7623031624404427296}
+  enemyMinimapIconPrefab: {fileID: 5709085877427446081, guid: 0d4772d8c5ba93c42a84e89a06123b40, type: 3}
   sizes: {x: 11, y: 9}
 --- !u!61 &5368775994027384567
 BoxCollider2D:
