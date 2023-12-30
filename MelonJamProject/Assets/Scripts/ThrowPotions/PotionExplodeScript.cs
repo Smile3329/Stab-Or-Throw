@@ -10,6 +10,20 @@ public class PotionExplodeScript : MonoBehaviour
 
     public Item _item;
 
+    public bool _throwed;
+
+    private void Update()
+    {
+        if (_item._itemType == Item.ItemType.HealthPotion)
+        {
+            if (_throwed)
+            {
+                GameObject.FindGameObjectWithTag("Player").GetComponent<HealthController>().health = 10;
+                DestroyPotion(0f);
+            }
+        }
+    }
+
     public void ExplodePotionWall()
     {
         switch (_item._itemType)

@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 7982930301080777490}
   - component: {fileID: 7982930301080777491}
   - component: {fileID: 1930382878718107419}
+  - component: {fileID: 2288417318965866212}
   m_Layer: 0
   m_Name: ThrowPotionPrefab
   m_TagString: Untagged
@@ -219,6 +220,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2288417318965866212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7982930301080777488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71890e12001ea8544a3103b8efc1323a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: {fileID: 3907730010118240763}
 --- !u!1 &8255399138709225316
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,5 +294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 313f927e724d96042810ba34473b8452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _icePotionFreezeTimeEnemy: 3
   _timeToDestroy: 5
-  item: {fileID: 0}
+  _item: {fileID: 0}
