@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -236,7 +236,9 @@ GameObject:
   - component: {fileID: 76760637}
   - component: {fileID: 76760640}
   - component: {fileID: 76760641}
-  m_Layer: 0
+  - component: {fileID: 76760642}
+  - component: {fileID: 76760643}
+  m_Layer: 5
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -252,8 +254,8 @@ Camera:
   m_GameObject: {fileID: 76760635}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.14509805, g: 0.07450981, b: 0.10196079, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.09019608, g: 0.043137256, b: 0.0627451, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -274,7 +276,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 439
+    m_Bits: 503
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -357,6 +359,83 @@ MonoBehaviour:
   _EnemyDieSound: {fileID: 1755406739}
   _playerDieSound: {fileID: 1755406739}
   _IcePotionCrashSound: {fileID: 517583533}
+--- !u!114 &76760642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76760635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 76760639}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 32
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 1
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 1
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 1
+  m_ShowCustomSorter: 1
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
+--- !u!114 &76760643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76760635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: beea2a5c295736e4b8e31b9b40a122cc, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1001 &131785241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -504,7 +583,7 @@ Camera:
   m_GameObject: {fileID: 259881242}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -769,7 +848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 517583534}
   - component: {fileID: 517583533}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: IcePotionCrashSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1341,6 +1420,8 @@ MonoBehaviour:
     type: 0
   - sprite: {fileID: 2119521491, guid: d2dc5c05cfb92d343b998cb9b1a0c33c, type: 3}
     type: 0
+  torchMaterial: {fileID: 2100000, guid: 61902dd3ee9f29f489f8be78bd4a639b, type: 2}
+  light: {fileID: 7117869340937387074, guid: fec043778268e224ba168f9b014995ef, type: 3}
 --- !u!1 &763950932
 GameObject:
   m_ObjectHideFlags: 0
@@ -2280,11 +2361,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4090285418564504774, guid: af15a44876624544593ab39c1f4cd2f6, type: 3}
       propertyPath: m_Volume
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6883785850830624894, guid: af15a44876624544593ab39c1f4cd2f6, type: 3}
       propertyPath: m_Volume
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6999056661635288452, guid: af15a44876624544593ab39c1f4cd2f6, type: 3}
       propertyPath: walkSpeed
@@ -2400,7 +2481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8657670865900119126, guid: af15a44876624544593ab39c1f4cd2f6, type: 3}
       propertyPath: m_Volume
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af15a44876624544593ab39c1f4cd2f6, type: 3}
@@ -3192,7 +3273,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8831756b97a2bd64a9935c9aa112d694, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.75
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3286,7 +3367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1724776882}
   - component: {fileID: 1724776883}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: 'PlayerDieSound '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3414,7 +3495,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1755406740}
   - component: {fileID: 1755406739}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EnemyDieSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4024,7 +4105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2004608817}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4143,6 +4224,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 977782461937723591, guid: 2999c6dfdbe7dd248a430a83c94bc68d, type: 3}
+      propertyPath: m_Intensity
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3133257438848319121, guid: 2999c6dfdbe7dd248a430a83c94bc68d, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -4247,10 +4332,6 @@ PrefabInstance:
     - target: {fileID: 5368775994027384570, guid: 94074479872b89c42a8d970ed8b446cc, type: 3}
       propertyPath: m_Name
       value: room
-      objectReference: {fileID: 0}
-    - target: {fileID: 5368775994027384570, guid: 94074479872b89c42a8d970ed8b446cc, type: 3}
-      propertyPath: m_TagString
-      value: Room
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94074479872b89c42a8d970ed8b446cc, type: 3}
