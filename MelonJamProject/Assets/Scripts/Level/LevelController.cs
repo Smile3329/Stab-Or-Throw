@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class LevelController : MonoBehaviour
 {
+    [SerializeField] private Animator transitor;
     [SerializeField] private GameObject ladderPrefab;
     [SerializeField] private AudioSource musicSource;
     [Tooltip("1 - enemy\n2 - levels\n3 - score")]
@@ -101,10 +102,26 @@ public class LevelController : MonoBehaviour
     }
 
     public void Restart() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        transitor.SetTrigger("NewLevel");
+        StartCoroutine(Wait(2f));
+    }
+
+    private IEnumerator Wait(float time) {
+        float timer = 0;
+        musicSource.volume = 1;
+        while (timer < 3) {
+            musicSource.volume = Mathf.Lerp(musicSource.volume, 0, time*Time.deltaTime);
+            
+            yield return null;
+
+            timer += Time.deltaTime;
+        }
+
+        SceneManager.LoadScene(1);
     }
 
     public void ToMenu() {
+        transitor.SetTrigger("NewLevel");
         SceneManager.LoadScene(0);
     }
 }

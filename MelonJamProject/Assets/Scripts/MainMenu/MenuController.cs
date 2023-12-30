@@ -8,11 +8,13 @@ using UnityEngine.SceneManagement;
 public class MenuController : MonoBehaviour
 {
     [SerializeField] private Vector3 optionPos;
+    [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioMixer mixer;
     [SerializeField] private Slider general;
     [SerializeField] private Slider music;
     [SerializeField] private Slider sfx;
     [SerializeField] private Slider other;
+    [SerializeField] private Animator transitor;
     private Animator anim;
     private Vector3 startPos;
 
@@ -49,6 +51,21 @@ public class MenuController : MonoBehaviour
     }
 
     public void StartGame() {
+        transitor.SetTrigger("NewLevel");
+        StartCoroutine(Wait(2f));
+    }
+
+    private IEnumerator Wait(float time) {
+        float timer = 0;
+        musicSource.volume = 1;
+        while (timer < 3) {
+            musicSource.volume = Mathf.Lerp(musicSource.volume, 0, time*Time.deltaTime);
+            
+            yield return null;
+
+            timer += Time.deltaTime;
+        }
+
         SceneManager.LoadScene(1);
     }
 }
