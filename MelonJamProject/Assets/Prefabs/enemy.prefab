@@ -402,8 +402,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radarRadius: 3
   idleRadius: 3
-  damage: 1
-  attackCooldown: 1
+  damage: 2
+  attackCooldown: 1.5
 --- !u!114 &851068012079601133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,7 +478,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.21133333}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 1
 --- !u!95 &705756830805344994
 Animator:
   serializedVersion: 5
