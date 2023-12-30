@@ -16,9 +16,14 @@ public class EnemyAI : MonoBehaviour
     private bool chasing = false;
     private float timer = 0;
     private bool attacking = false;
+    private Animator anim;
+    private SpriteRenderer spriteRenderer;
 
     private void Start() {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         GetComponent<HealthController>().InitScript(gameObject);
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -40,6 +45,12 @@ public class EnemyAI : MonoBehaviour
                 timer = 0;
             }
         }
+
+        if (agent.velocity.magnitude > 0) {
+            spriteRenderer.flipX = agent.velocity.x < 0;
+        }
+
+        anim.SetFloat("Speed", agent.velocity.sqrMagnitude);
 
         transform.GetChild(0).gameObject.SetActive(linkedRoom.playerInRoom);
     }
@@ -65,6 +76,8 @@ public class EnemyAI : MonoBehaviour
     }
 
     public void Die() {
+        anim.enabled = false;
+        linkedRoom.EnemyKilled();
         StopAllCoroutines();
         agent.velocity = Vector2.zero;
         // Animation of dying
@@ -97,8 +110,10 @@ public class EnemyAI : MonoBehaviour
     public IEnumerator FreezeEnemy(float freezTime)
     {
         float enemySpeed = agent.speed;
+        anim.enabled = false;
         agent.speed = 0;
         yield return new WaitForSeconds(freezTime);
+        anim.enabled = true;
         agent.speed = enemySpeed;
     }
 

@@ -44,6 +44,7 @@ public class HealthController : MonoBehaviour
 
             if (healthBar != null) {
                 ScoreCounter.instance.AddScore(10);
+                healthBar.ChangeValue(health);
             }
 
             this.enabled = false;

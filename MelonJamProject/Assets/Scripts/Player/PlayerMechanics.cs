@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMechanics : MonoBehaviour
 {
-
+    [SerializeField] private Transform playerMinimapIcon;
 
     private void Start() {
         GetComponent<HealthController>().InitScript(gameObject);
+    }
+
+    private void Update() {
+        
     }
 
     public void Die() {
@@ -20,6 +24,9 @@ public class PlayerMechanics : MonoBehaviour
         if (other.CompareTag("Sword")) {
             GetComponentInChildren<SwordController>().ActivateSword();
             Destroy(other.gameObject);
+        }
+        if (other.CompareTag("Room")) {
+            playerMinimapIcon.position = other.transform.position;
         }
     }
 }
