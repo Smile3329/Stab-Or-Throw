@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trigger: {fileID: 3907730010118240763}
+  _throwed: 0
 --- !u!1 &8255399138709225316
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,9 +280,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.07881737}
+  m_Offset: {x: -0.00000023841858, y: -0.07881701}
   serializedVersion: 2
-  m_Radius: 2.5965314
+  m_Radius: 1.7552431
 --- !u!114 &1681231614332708117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,4 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icePotionFreezeTimeEnemy: 3
   _timeToDestroy: 5
-  _item: {fileID: 0}
+  _potionExplodeDamage: {fileID: 4869620070415896070, guid: 5d611ff70a4f00f40b3a8302310075bd, type: 3}
+  _potionExplodeIce: {fileID: 4869620070415896070, guid: e9bf9b7f8991a344bbe20d7debd9cb37, type: 3}
+  _potionExplodeHealing: {fileID: 4869620070415896070, guid: e83922843d981884a8e48d29663f52d5, type: 3}
+  _throwed: 0

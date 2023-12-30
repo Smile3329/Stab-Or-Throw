@@ -8,7 +8,7 @@ public class ScoreCounter : MonoBehaviour
     [SerializeField] private Text scoreText;
 
     public static ScoreCounter instance {get; private set;}
-    private int score;
+    public int score;
     
     private void Awake() {
         instance = this;
