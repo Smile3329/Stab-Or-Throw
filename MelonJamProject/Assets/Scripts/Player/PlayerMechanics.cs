@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerMechanics : MonoBehaviour
 {
     [SerializeField] private Transform playerMinimapIcon;
+    private Room room;
 
     private void Start() {
         GetComponent<HealthController>().InitScript(gameObject);
@@ -16,8 +16,9 @@ public class PlayerMechanics : MonoBehaviour
     }
 
     public void Die() {
+        LevelController.instance.PlayerDied();
         // animation
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -27,6 +28,11 @@ public class PlayerMechanics : MonoBehaviour
         }
         if (other.CompareTag("Room")) {
             playerMinimapIcon.position = other.transform.position;
+            room = other.GetComponent<Room>();
         }
+    }
+
+    public Room GetCurrentRoom() {
+        return room;
     }
 }

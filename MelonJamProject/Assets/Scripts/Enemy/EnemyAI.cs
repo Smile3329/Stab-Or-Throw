@@ -76,6 +76,9 @@ public class EnemyAI : MonoBehaviour
     }
 
     public void Die() {
+        ScoreCounter.instance.AddScore(10);
+        LevelController.instance.EnemyDied();
+
         anim.enabled = false;
         linkedRoom.EnemyKilled();
         StopAllCoroutines();

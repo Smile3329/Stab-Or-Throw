@@ -56,6 +56,8 @@ public class DecorationGenerator : MonoBehaviour
                 }
             }
         }
+
+        // ClearDecorations();
     }
 
     private void GenerateWallDecoration(Room room, Sprite sprite) {
@@ -65,14 +67,14 @@ public class DecorationGenerator : MonoBehaviour
         Vector2 position = new Vector2(Random.Range((-room.sizes.x+2)/2, (room.sizes.x-2)/2), room.sizes.y/2) + Vector2.one/2;
 
         if (position.x == 0) {
-            position.x += Mathf.Sign(Random.Range(-2, 1));
+            position.x += 1;
         }
 
         while (wallDecorationPositions.Contains(position)) {
             position = new Vector2(Random.Range((-room.sizes.x+2)/2, (room.sizes.x-2)/2), room.sizes.y/2) + Vector2.one/2;
 
             if (position.x == 0.5f) {
-                position.x += Mathf.Sign(Random.Range(-2, 1));
+                position.x += 1;
             }
         }
 
@@ -106,9 +108,19 @@ public class DecorationGenerator : MonoBehaviour
 
     private GameObject CreateGameObject(Sprite sprite) {
         GameObject obj = Instantiate(new GameObject("Decoration (" + sprite.name + ")"));
+        obj.transform.tag = "Decoration";
         SpriteRenderer renderer = obj.AddComponent<SpriteRenderer>();
         renderer.sprite = sprite;
         renderer.renderingLayerMask = 2;
         return obj;
     }
+
+    // private void ClearDecorations() {
+    //     GameObject[] decorations = GameObject.FindGameObjectsWithTag("Decoration");
+    //     foreach (GameObject obj in decorations) {
+    //         if (obj.transform.parent == null) {
+    //             Destroy(obj);
+    //         }
+    //     }
+    // }
 }

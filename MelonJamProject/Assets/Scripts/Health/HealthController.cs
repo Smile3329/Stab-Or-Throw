@@ -43,7 +43,6 @@ public class HealthController : MonoBehaviour
             script.SendMessage("Die");
 
             if (healthBar != null) {
-                ScoreCounter.instance.AddScore(10);
                 healthBar.ChangeValue(health);
             }
 

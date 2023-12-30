@@ -26,22 +26,19 @@ public class RoomGenerator : MonoBehaviour
         instance = this;
     }
 
-    private void Start() {
-        InitFirstRoom();
-        InitRoomCount();
-    }
-
     private void InitFirstRoom() {
         createdRooms.Add(firstRoom);
         unclosedRooms.Add(firstRoom);
     }
 
-    private void InitRoomCount() {
-        // roomCount = Random.Range(5 + levelsPassed, 10 + 2 * levelsPassed);
-        roomCount = 12;
+    private void InitRoomCount(float roomMultiplier) {
+        roomCount = Mathf.RoundToInt(Random.Range(5, 10 ) * roomMultiplier);
     }
 
-    public List<Room> GenerateRooms() {
+    public List<Room> GenerateRooms(float roomMultiplier) {
+        InitFirstRoom();
+        InitRoomCount(roomMultiplier);
+
         while (createdRooms.Count <= roomCount) {
             currentRoom = unclosedRooms[Random.Range(0, unclosedRooms.Count-1)];
             unclosedRooms.Remove(currentRoom);
