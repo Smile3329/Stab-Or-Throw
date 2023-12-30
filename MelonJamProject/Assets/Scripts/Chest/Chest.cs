@@ -8,6 +8,7 @@ public class Chest : MonoBehaviour
     [SerializeField] private ItemWorld itemPrefab;
     [SerializeField] private GameObject swordPrefab;
     [SerializeField] private InputActionReference inputAction;
+    [SerializeField] private AudioSource source;
 
     private Animator anim;
     private bool openable = false;
@@ -29,7 +30,7 @@ public class Chest : MonoBehaviour
             ItemWorld item = Instantiate(itemPrefab.gameObject, transform.position + circle, Quaternion.identity).GetComponent<ItemWorld>();
             int itemType = Random.Range(0, 10);
 
-            if (itemType < 2) {
+            if (itemType < 4) {
                 item._itemType = Item.ItemType.DamagePotion;
             } else {
                 if (itemType > 7) {
@@ -43,11 +44,12 @@ public class Chest : MonoBehaviour
         ItemWorld obj = Instantiate(itemPrefab.gameObject, transform.position, Quaternion.identity).GetComponent<ItemWorld>();
         obj._itemType = Item.ItemType.DamagePotion;
 
-        if (Random.Range(0, 5) > 2) {
+        if (Random.Range(0, 5) > 3) {
             Instantiate(swordPrefab, transform.position + Vector3.one, Quaternion.identity);
         }
 
         anim.SetTrigger("Open");
+        source.Play();
 
         Destroy(gameObject, 2);
     }

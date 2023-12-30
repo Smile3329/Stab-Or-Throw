@@ -16,7 +16,7 @@ public class LevelController : MonoBehaviour
 
     private int enemyCount;
     private int enemyKilled = 0;
-    private float roomMultiplier = 1;
+    private float DifficultyMultiplier = 1;
     private bool levelCleared = false;
 
     private void Awake() {
@@ -25,22 +25,22 @@ public class LevelController : MonoBehaviour
 
     void Start()
     {
-        roomMultiplier = PlayerPrefs.GetFloat("RoomMultiplier", 1);
+        DifficultyMultiplier = PlayerPrefs.GetFloat("DifficultyMultiplier", 1);
 
-        List<Room> generatedRooms = RoomGenerator.instance.GenerateRooms(roomMultiplier);
+        List<Room> generatedRooms = RoomGenerator.instance.GenerateRooms(DifficultyMultiplier);
         RoomGenerator.instance.GenerateDoors();
         
         ObstacleGenerator.instance.GenerateObstacles(generatedRooms);
         DecorationGenerator.instance.GenerateDecorations(generatedRooms);
         ChestGenerator.instance.Generate(generatedRooms);
-        enemyCount = EnemyGenerator.instance.GenerateEnemies(generatedRooms);
+        enemyCount = EnemyGenerator.instance.GenerateEnemies(generatedRooms, DifficultyMultiplier);
 
         StartCoroutine(MusicVolume(false));
     }
     
     private void Update() {
         if (enemyCount <= 0 && !levelCleared) {
-            PlayerPrefs.SetFloat("RoomMultiplier", roomMultiplier + 0.2f);
+            PlayerPrefs.SetFloat("DifficultyMultiplier", DifficultyMultiplier + 0.2f);
             PlayerPrefs.SetInt("LevelsCleared", PlayerPrefs.GetInt("LevelsCleared", 1) + 1);
             PlayerPrefs.SetInt("EnemeyKilled", PlayerPrefs.GetInt("EnemeyKilled", 0) + enemyKilled);
             PlayerPrefs.SetInt("TotalScore", PlayerPrefs.GetInt("TotalScore", 0) + ScoreCounter.instance.GetScore());

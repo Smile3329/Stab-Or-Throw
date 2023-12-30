@@ -5,8 +5,6 @@ using UnityEngine;
 public class EnemyGenerator : MonoBehaviour
 {
     [Header("Values")]
-    [Range(1, 4)]
-    [SerializeField] private float enemySpawnRate = 1;
 
     [Header("References")]
     //TODO: several enemy prefabs
@@ -18,12 +16,12 @@ public class EnemyGenerator : MonoBehaviour
         instance = this;
     }
 
-    public int GenerateEnemies(List<Room> generatedRooms) {
+    public int GenerateEnemies(List<Room> generatedRooms, float enemySpawnRate) {
         int enemyCountInSum = 0;
         generatedRooms.RemoveAt(0);
         foreach (Room room in generatedRooms) {
             int enemyCount = 0;
-            for (int i = 0; i < Random.Range(-1, 2*enemySpawnRate); i++) {
+            for (int i = 0; i < Random.Range(0, 2*enemySpawnRate); i++) {
                 Vector3 spawnPosition = new Vector3(Random.Range(-room.sizes.x+1, room.sizes.x-1),Random.Range(-room.sizes.y+1, room.sizes.y-1), 0);
                 spawnPosition = spawnPosition/2 + room.transform.position;
                 GameObject obj = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
