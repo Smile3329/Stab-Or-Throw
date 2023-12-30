@@ -20,8 +20,6 @@ public class DecorationGenerator : MonoBehaviour
     }
 
     [SerializeField] private List<Decoration> decorationsClass;
-    [SerializeField] private Material torchMaterial;
-    [SerializeField] private GameObject light;
 
     public static DecorationGenerator instance {get; private set;}
     private Dictionary<Sprite, DecorationType> decorations = new Dictionary<Sprite, DecorationType>();
@@ -116,11 +114,6 @@ public class DecorationGenerator : MonoBehaviour
         SpriteRenderer renderer = obj.AddComponent<SpriteRenderer>();
         renderer.sprite = sprite;
         renderer.renderingLayerMask = 2;
-
-        if (sprite.name.Contains("90")) {
-            renderer.material = torchMaterial;
-            Instantiate(light, obj.transform).transform.position = new Vector3(0, 0, -0.36f);
-        }
 
         return obj;
     }

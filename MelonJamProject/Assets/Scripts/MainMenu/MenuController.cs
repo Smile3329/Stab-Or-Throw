@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
     [SerializeField] private Vector3 optionPos;
+    [SerializeField] private AudioMixer mixer;
+    [SerializeField] private Slider general;
+    [SerializeField] private Slider music;
+    [SerializeField] private Slider sfx;
+    [SerializeField] private Slider other;
     private Animator anim;
     private Vector3 startPos;
 
@@ -13,6 +20,13 @@ public class MenuController : MonoBehaviour
     {
         startPos = transform.position;
         anim = GetComponent<Animator>();
+    }
+
+    private void Update() {
+        mixer.SetFloat("Master", general.value - 80);
+        mixer.SetFloat("Music", music.value - 80);
+        mixer.SetFloat("SFX", sfx.value - 80);
+        mixer.SetFloat("Other", other.value - 80);
     }
 
     public void Options() {
