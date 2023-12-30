@@ -8,9 +8,17 @@ public class PotionExplodeScript : MonoBehaviour
 
     [SerializeField] float _timeToDestroy;
 
+    [SerializeField] private GameObject _potionExplodeDamage;
+
+    [SerializeField] private GameObject _potionExplodeIce;
+
+    [SerializeField] private GameObject _potionExplodeHealing;
+
     public Item _item;
 
     public bool _throwed;
+
+    private bool _exploded;
 
     private void Update()
     {
@@ -31,7 +39,7 @@ public class PotionExplodeScript : MonoBehaviour
         {
             default:
             case Item.ItemType.DamagePotion:
-                DestroyPotion(1);
+                DestroyPotion(0);
                 break;
 
             case Item.ItemType.IcePotion:
@@ -39,7 +47,7 @@ public class PotionExplodeScript : MonoBehaviour
                 break;
 
             case Item.ItemType.HealthPotion:
-                DestroyPotion(1);
+                DestroyPotion(0);
                 break;
         }
     }
@@ -51,7 +59,7 @@ public class PotionExplodeScript : MonoBehaviour
             default:
             case Item.ItemType.DamagePotion:
                 healthController.health -= 5;
-                DestroyPotion(1);
+                DestroyPotion(0);
                 break;
 
             case Item.ItemType.IcePotion:
@@ -61,7 +69,7 @@ public class PotionExplodeScript : MonoBehaviour
                 break;
 
             case Item.ItemType.HealthPotion:
-                DestroyPotion(1f);
+                DestroyPotion(0f);
                 break;
         }
         Destroy(this);
@@ -95,6 +103,25 @@ public class PotionExplodeScript : MonoBehaviour
 
     public void DestroyPotion(float time)
     {
+        if (!_exploded)
+        {
+            switch (_item._itemType)
+            {
+                default:
+                case Item.ItemType.DamagePotion:
+                    Instantiate(_potionExplodeDamage, transform.position, Quaternion.identity);
+                    break;
+
+                case Item.ItemType.IcePotion:
+                    Instantiate(_potionExplodeIce, transform.position, Quaternion.identity);
+                    break;
+
+                case Item.ItemType.HealthPotion:
+                    Instantiate(_potionExplodeHealing, transform.position, Quaternion.identity);
+                    break;
+            }
+        }
+        _exploded = true;
         Destroy(transform.parent.gameObject, time);
     }
 
