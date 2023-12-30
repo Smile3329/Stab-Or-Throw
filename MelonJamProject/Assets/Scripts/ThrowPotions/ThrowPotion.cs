@@ -82,6 +82,10 @@ public class ThrowPotion : MonoBehaviour
 
         _spawnedPotionGameObject.transform.GetChild(1).GetComponent<PotionExplodeScript>().DefaultCrashPotion();
 
+        _spawnedPotionGameObject.transform.GetChild(1).GetComponent<PotionExplodeScript>()._throwed = true;
+
+        _spawnedPotionGameObject.GetComponent<PotionScript>()._throwed = true;
+
         _spawnedPotionGameObject.transform.parent = null;
 
         _canThrowPotion = true;
