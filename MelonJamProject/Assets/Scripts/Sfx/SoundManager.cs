@@ -31,4 +31,9 @@ public class SoundManager : MonoBehaviour
     public void PlayerDamaged() {
         _audioSource.PlayOneShot(_clips[4]);
     }
+
+    public void ThrowPotion()
+    {
+        _audioSource.PlayOneShot(_clips[5]);
+    }
 }

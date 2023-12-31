@@ -20,6 +20,8 @@ public class PotionExplodeScript : MonoBehaviour
 
     private bool _exploded;
 
+    private int _canPlayAnim;
+
     private void Update()
     {
         if (_item._itemType == Item.ItemType.HealthPotion)
@@ -27,7 +29,7 @@ public class PotionExplodeScript : MonoBehaviour
             if (_throwed)
             {
                 GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SoundManager>().HealUsed();
-                GameObject.FindGameObjectWithTag("Player").GetComponent<HealthController>().health = 10;
+                GameObject.FindGameObjectWithTag("Player").GetComponent<HealthController>().health = 20;
                 DestroyPotion(0f);
             }
         }
@@ -39,11 +41,11 @@ public class PotionExplodeScript : MonoBehaviour
         {
             default:
             case Item.ItemType.DamagePotion:
-                DestroyPotion(0);
+                DestroyPotion(1f);
                 break;
 
             case Item.ItemType.IcePotion:
-                DestroyPotion(0);
+                DestroyPotion(1f);
                 break;
 
             case Item.ItemType.HealthPotion:
@@ -59,13 +61,13 @@ public class PotionExplodeScript : MonoBehaviour
             default:
             case Item.ItemType.DamagePotion:
                 healthController.health -= 5;
-                DestroyPotion(0);
+                DestroyPotion(1f);
                 break;
 
             case Item.ItemType.IcePotion:
                 GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SoundManager>().IcePotionCrashSound();
                 enemy.transform.GetComponent<EnemyAI>().StartFreezeEnemy(_icePotionFreezeTimeEnemy);
-                DestroyPotion(0);
+                DestroyPotion(1f);
                 break;
 
             case Item.ItemType.HealthPotion:
@@ -103,6 +105,15 @@ public class PotionExplodeScript : MonoBehaviour
 
     public void DestroyPotion(float time)
     {
+        if (_canPlayAnim >= 2)
+        {
+            _exploded = true;
+        }
+        else
+        {
+            _canPlayAnim++;
+        }
+
         if (!_exploded)
         {
             switch (_item._itemType)
@@ -121,7 +132,7 @@ public class PotionExplodeScript : MonoBehaviour
                     break;
             }
         }
-        _exploded = true;
+
         Destroy(transform.parent.gameObject, time);
     }
 

@@ -62,6 +62,8 @@ public class ThrowPotion : MonoBehaviour
 
     public void throwPotion(float throwForce)
     {
+        GetComponent<SoundManager>().ThrowPotion();
+
         _potionAim = false;
 
         //_spawnedPotionGameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;

@@ -938,7 +938,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Some Title
+  m_Text: Stab or Throw
 --- !u!222 &554779870
 CanvasRenderer:
   m_ObjectHideFlags: 0
