@@ -274,7 +274,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8255399138709225316}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -282,7 +282,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.00000023841858, y: -0.07881701}
   serializedVersion: 2
-  m_Radius: 1.7552431
+  m_Radius: 1
 --- !u!114 &1681231614332708117
 MonoBehaviour:
   m_ObjectHideFlags: 0

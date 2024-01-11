@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UI_Inventory : MonoBehaviour
 {
     [SerializeField] ThrowPotion _throwPotion;
+    [SerializeField] float maxX = 3;
 
     private Invenetory _inventory;
 
@@ -37,7 +38,7 @@ public class UI_Inventory : MonoBehaviour
 
         int x = 0;
         int y = 0;
-        float itemSlotCellSize = 200f;
+        float itemSlotCellSize = _itemSlotTemplate.GetComponent<RectTransform>().rect.height+20;
 
         foreach (Item item in _inventory.GetItemsList())
         {
@@ -45,10 +46,11 @@ public class UI_Inventory : MonoBehaviour
             itemSlotRectTransform.gameObject.SetActive(true);
 
             itemSlotRectTransform.GetComponent<Button>().onClick.AddListener(delegate () {
-                _throwPotion.PotionAim(item, itemSlotRectTransform.transform.Find("image").GetComponent<Image>());
-                _inventory.RemoveItem(item);
-                // _inventory.UseItem(item);
-                RefreshInventoryItems();
+                if (_throwPotion._canThrowPotion) {
+                    _throwPotion.PotionAim(item, itemSlotRectTransform.transform.Find("image").GetComponent<Image>());
+                    _inventory.RemoveItem(item);
+                    RefreshInventoryItems();
+                }
             });
 
             itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);
@@ -56,7 +58,7 @@ public class UI_Inventory : MonoBehaviour
             image.sprite = item.GetSprite();          
 
             x++;
-            if (x >= 3)
+            if (x >= maxX)
             {
                 x = 0;
                 y--;

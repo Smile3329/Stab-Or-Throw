@@ -116,12 +116,14 @@ public class EnemyAI : MonoBehaviour
 
     public IEnumerator FreezeEnemy(float freezTime)
     {
+        attacking = true;
         float enemySpeed = agent.speed;
         anim.enabled = false;
         agent.speed = 0;
         yield return new WaitForSeconds(freezTime);
         anim.enabled = true;
         agent.speed = enemySpeed;
+        attacking = false;
     }
 
     public void StartFreezeEnemy(float freeztime)

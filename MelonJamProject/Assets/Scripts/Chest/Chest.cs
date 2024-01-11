@@ -30,7 +30,7 @@ public class Chest : MonoBehaviour
             ItemWorld item = Instantiate(itemPrefab.gameObject, transform.position + circle, Quaternion.identity).GetComponent<ItemWorld>();
             int itemType = Random.Range(0, 10);
 
-            if (itemType < 4) {
+            if (itemType < 5) {
                 item._itemType = Item.ItemType.DamagePotion;
             } else {
                 if (itemType > 7) {

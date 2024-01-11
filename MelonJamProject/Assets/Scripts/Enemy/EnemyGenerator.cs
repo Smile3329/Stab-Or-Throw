@@ -21,9 +21,9 @@ public class EnemyGenerator : MonoBehaviour
         generatedRooms.RemoveAt(0);
         foreach (Room room in generatedRooms) {
             int enemyCount = 0;
-            for (int i = 0; i < Random.Range(0, 2*enemySpawnRate); i++) {
-                Vector3 spawnPosition = new Vector3(Random.Range(-room.sizes.x+1, room.sizes.x-1),Random.Range(-room.sizes.y+1, room.sizes.y-1), 0);
-                spawnPosition = spawnPosition/2 + room.transform.position;
+            for (int i = 0; i < Random.Range(1*enemySpawnRate, 2*enemySpawnRate); i++) {
+                Vector3 spawnPosition = new Vector3(Random.Range(-room.sizes.x/2+1, room.sizes.x/2-1),Random.Range(-room.sizes.y/2+1, room.sizes.y/2-1), 0);
+                spawnPosition = spawnPosition + room.transform.position;
                 GameObject obj = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
                 obj.transform.parent = transform;
                 obj.GetComponent<EnemyAI>().SetRoom(room);

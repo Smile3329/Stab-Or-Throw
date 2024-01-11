@@ -12,13 +12,15 @@ public class LevelController : MonoBehaviour
     [Tooltip("1 - enemy\n2 - levels\n3 - score")]
     [SerializeField] private List<Text> texts;
     [SerializeField] private GameObject losePanel;
+    [SerializeField] private GameObject pausePanel;
 
     public static LevelController instance {get; private set;}
 
     private int enemyCount;
     private int enemyKilled = 0;
-    private float DifficultyMultiplier = 1;
+    private float difficultyMultiplier = 1;
     private bool levelCleared = false;
+    private bool isPaused = false;
 
     private void Awake() {
         instance = this;
@@ -26,22 +28,22 @@ public class LevelController : MonoBehaviour
 
     void Start()
     {
-        DifficultyMultiplier = PlayerPrefs.GetFloat("DifficultyMultiplier", 1);
+        difficultyMultiplier = PlayerPrefs.GetFloat("DifficultyMultiplier", 1);
 
-        List<Room> generatedRooms = RoomGenerator.instance.GenerateRooms(DifficultyMultiplier);
+        List<Room> generatedRooms = RoomGenerator.instance.GenerateRooms(difficultyMultiplier);
         RoomGenerator.instance.GenerateDoors();
         
         ObstacleGenerator.instance.GenerateObstacles(generatedRooms);
         DecorationGenerator.instance.GenerateDecorations(generatedRooms);
-        ChestGenerator.instance.Generate(generatedRooms);
-        enemyCount = EnemyGenerator.instance.GenerateEnemies(generatedRooms, DifficultyMultiplier);
+        ChestGenerator.instance.Generate(generatedRooms, difficultyMultiplier);
+        enemyCount = EnemyGenerator.instance.GenerateEnemies(generatedRooms, difficultyMultiplier);
 
         StartCoroutine(MusicVolume(false));
     }
     
     private void Update() {
         if (enemyCount <= 0 && !levelCleared) {
-            PlayerPrefs.SetFloat("DifficultyMultiplier", DifficultyMultiplier + 0.2f);
+            PlayerPrefs.SetFloat("DifficultyMultiplier", difficultyMultiplier + 0.2f);
             PlayerPrefs.SetInt("LevelsCleared", PlayerPrefs.GetInt("LevelsCleared", 1) + 1);
             PlayerPrefs.SetInt("EnemeyKilled", PlayerPrefs.GetInt("EnemeyKilled", 0) + enemyKilled);
             PlayerPrefs.SetInt("TotalScore", PlayerPrefs.GetInt("TotalScore", 0) + ScoreCounter.instance.GetScore());
@@ -57,11 +59,27 @@ public class LevelController : MonoBehaviour
         levelCleared = true;
     }
 
+    public void Pause() {
+        isPaused = !isPaused;
+
+        StartCoroutine(MusicVolume(isPaused));
+
+        pausePanel.SetActive(isPaused);
+
+        UpdateScores();
+
+        Time.timeScale = isPaused ? 0 : 1;
+    }
+
     public void PlayerDied() {
         StartCoroutine(MusicVolume(true));
 
         losePanel.SetActive(true);
 
+        UpdateScores();
+    }
+
+    private void UpdateScores() {
         texts[0].text = "Enemy Killed: " + PlayerPrefs.GetInt("EnemeyKilled");
         texts[1].text = "Levels Passed: " + PlayerPrefs.GetInt("LevelsCleared", 0);
         texts[2].text = "Total Score: " + PlayerPrefs.GetInt("TotalScore");
@@ -70,28 +88,28 @@ public class LevelController : MonoBehaviour
         PlayerPrefs.SetInt("LevelsCleared", 0);
         PlayerPrefs.SetInt("EnemeyKilled", 0);
         PlayerPrefs.SetInt("TotalScore", 0);
-    }
+    } 
 
     private IEnumerator MusicVolume(bool backward) {
         if (!backward) {
             float time = 0;
             musicSource.volume = 0;
             while (time < 3) {
-                musicSource.volume = Mathf.Lerp(musicSource.volume, 1, time*Time.deltaTime);
+                musicSource.volume = Mathf.Lerp(musicSource.volume, 1, time*Time.unscaledDeltaTime);
 
                 yield return null;
 
-                time += Time.deltaTime;
+                time += Time.unscaledDeltaTime;
             }
         } else {
             float time = 0;
             musicSource.volume = 1;
             while (time < 3) {
-                musicSource.volume = Mathf.Lerp(musicSource.volume, 0, time*Time.deltaTime);
+                musicSource.volume = Mathf.Lerp(musicSource.volume, 0, time*Time.unscaledDeltaTime);
                 
                 yield return null;
 
-                time += Time.deltaTime;
+                time += Time.unscaledDeltaTime;
             }
         }
     }
@@ -103,10 +121,10 @@ public class LevelController : MonoBehaviour
 
     public void Restart() {
         transitor.SetTrigger("NewLevel");
-        StartCoroutine(Wait(2f));
+        StartCoroutine(Wait(2f, 1));
     }
 
-    private IEnumerator Wait(float time) {
+    private IEnumerator Wait(float time, int sceneIndex) {
         float timer = 0;
         musicSource.volume = 1;
         while (timer < 3) {
@@ -117,11 +135,12 @@ public class LevelController : MonoBehaviour
             timer += Time.deltaTime;
         }
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(sceneIndex);
     }
 
     public void ToMenu() {
+        Time.timeScale = 1;
         transitor.SetTrigger("NewLevel");
-        SceneManager.LoadScene(0);
+        StartCoroutine(Wait(2f, 0));
     }
 }

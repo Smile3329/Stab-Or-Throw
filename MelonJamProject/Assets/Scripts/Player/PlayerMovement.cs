@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private float timeSinceLastFootstep; // Time since the last footstep sound
 
     [SerializeField] private float walkSpeed = 2f;
+    [SerializeField] private float maxItems = 6;
 
     [SerializeField] UI_Inventory _UI_inventory;
 
@@ -35,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
 
-        _inventory = new Invenetory(UseItem);
+        _inventory = new Invenetory(UseItem, maxItems);
 
         _UI_inventory.SetInventory(_inventory);
     }
@@ -43,9 +44,8 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         ItemWorld itemWorld = collision.gameObject.GetComponent<ItemWorld>();
-        if (itemWorld != null)
+        if (itemWorld != null && _inventory.AddItem(new Item { _itemType = itemWorld._item._itemType }))
         {
-            _inventory.AddItem(new Item { _itemType = itemWorld._item._itemType });
             _UI_inventory.RefreshInventoryItems();
             itemWorld.DestroySelf();
             PickupPotionSound();
@@ -103,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
         // _anim.SetFloat("moveX", Mathf.Abs(_moveVector.x));
         _rb.velocity = new Vector2(_moveVector.x * speed, _rb.velocity.y);
         _rb.velocity = new Vector2(_rb.velocity.x, _moveVector.y * speed);
+        _rb.velocity = _rb.velocity * new Vector2(Mathf.Abs(_rb.velocity.normalized.x), Mathf.Abs(_rb.velocity.normalized.y));
         // _rb.AddForce(new Vector2(_moveVector.x * speed*Time.deltaTime*250, 0), ForceMode2D.Force);
         // _rb.AddForce(new Vector2(0, _moveVector.y * speed*Time.deltaTime*250), ForceMode2D.Force);
     }

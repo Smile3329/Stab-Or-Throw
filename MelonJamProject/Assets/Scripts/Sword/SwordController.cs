@@ -53,19 +53,22 @@ public class SwordController : MonoBehaviour
 
     private void Attack() {
         if (!onCooldown) {
+
             GetComponentInChildren<Animator>().SetTrigger("Attack");
             foreach (Collider2D collider in Physics2D.OverlapCircleAll(circleOrigin.position, radius)) {
                 if (collider.CompareTag("Enemy")) {
                     collider.GetComponent<HealthController>().health -= damage;
                     onCooldown = true;
-                    StartCoroutine(Cooldown());
                     audioSource.PlayOneShot(clips[0]);
                 }
             }
 
             if (!onCooldown) {
                 audioSource.PlayOneShot(clips[1]);
+                onCooldown = true;
             }
+
+            StartCoroutine(Cooldown());
         }
     }
 

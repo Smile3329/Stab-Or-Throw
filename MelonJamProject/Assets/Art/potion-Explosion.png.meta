@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 24
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -129,76 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: potion-Explosion_0
-      rect:
-        serializedVersion: 2
-        x: 295
-        y: 52
-        width: 6
-        height: 38
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2611787895eac3145a733971e9b136a6
-      internalID: -483760284
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: potion-Explosion_1
-      rect:
-        serializedVersion: 2
-        x: 402
-        y: 72
-        width: 1
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e6dc8aac8bc23dc489659ff17bc0f9f9
-      internalID: -567120493
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: potion-Explosion_2
-      rect:
-        serializedVersion: 2
-        x: 500
-        y: 72
-        width: 40
-        height: 17
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cd6560d76abd72649860e0d4a5b01a2a
-      internalID: 1143130742
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: potion-Explosion_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 100
-        height: 42
+        x: 45
+        y: 9
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,10 +153,10 @@ TextureImporter:
       name: potion-Explosion_4
       rect:
         serializedVersion: 2
-        x: 100
-        y: 0
-        width: 100
-        height: 42
+        x: 148
+        y: 9
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,10 +174,10 @@ TextureImporter:
       name: potion-Explosion_5
       rect:
         serializedVersion: 2
-        x: 200
-        y: 0
-        width: 100
-        height: 42
+        x: 248
+        y: 9
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,10 +195,10 @@ TextureImporter:
       name: potion-Explosion_6
       rect:
         serializedVersion: 2
-        x: 300
-        y: 0
-        width: 100
-        height: 42
+        x: 340
+        y: 2
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,10 +216,10 @@ TextureImporter:
       name: potion-Explosion_7
       rect:
         serializedVersion: 2
-        x: 400
-        y: 0
-        width: 100
-        height: 42
+        x: 439
+        y: 2
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -300,10 +237,10 @@ TextureImporter:
       name: potion-Explosion_8
       rect:
         serializedVersion: 2
-        x: 500
-        y: 0
-        width: 100
-        height: 42
+        x: 540
+        y: 2
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

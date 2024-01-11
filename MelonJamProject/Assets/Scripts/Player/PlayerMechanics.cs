@@ -13,6 +13,12 @@ public class PlayerMechanics : MonoBehaviour
         GetComponent<HealthController>().InitScript(gameObject);
     }
 
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            LevelController.instance.Pause();
+        }
+    }
+
     public void Die() {
         LevelController.instance.PlayerDied();
         // animation

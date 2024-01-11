@@ -30,7 +30,7 @@ public class PotionExplodeScript : MonoBehaviour
             {
                 GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SoundManager>().HealUsed();
                 GameObject.FindGameObjectWithTag("Player").GetComponent<HealthController>().health = 20;
-                DestroyPotion(0f);
+                StartCoroutine(DestroyPotion(0f));
             }
         }
     }
@@ -41,49 +41,46 @@ public class PotionExplodeScript : MonoBehaviour
         {
             default:
             case Item.ItemType.DamagePotion:
-                DestroyPotion(1f);
+                StartCoroutine(DestroyPotion(0f));
                 break;
 
             case Item.ItemType.IcePotion:
-                DestroyPotion(1f);
+                StartCoroutine(DestroyPotion(0f));
                 break;
 
             case Item.ItemType.HealthPotion:
-                DestroyPotion(0);
+                StartCoroutine(DestroyPotion(0));
                 break;
         }
     }
 
     public void ExplodePotionEnemy(HealthController healthController, Collider2D enemy)
     {
-        switch (_item._itemType)
-        {
-            default:
-            case Item.ItemType.DamagePotion:
-                healthController.health -= 5;
-                DestroyPotion(1f);
-                break;
+        if (_throwed) {
+            switch (_item._itemType)
+            {
+                default:
+                case Item.ItemType.DamagePotion:
+                    healthController.health -= 5;
+                    StartCoroutine(DestroyPotion(0f));
+                    break;
 
-            case Item.ItemType.IcePotion:
-                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SoundManager>().IcePotionCrashSound();
-                enemy.transform.GetComponent<EnemyAI>().StartFreezeEnemy(_icePotionFreezeTimeEnemy);
-                DestroyPotion(1f);
-                break;
+                case Item.ItemType.IcePotion:
+                    GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SoundManager>().IcePotionCrashSound();
+                    enemy.transform.GetComponent<EnemyAI>().StartFreezeEnemy(_icePotionFreezeTimeEnemy);
+                    StartCoroutine(DestroyPotion(0f));
+                    break;
 
-            case Item.ItemType.HealthPotion:
-                DestroyPotion(0f);
-                break;
+                case Item.ItemType.HealthPotion:
+                    StartCoroutine(DestroyPotion(0f));
+                    break;
+            }
+            // Destroy(this);
         }
-        Destroy(this);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Wall")
-        {
-            ExplodePotionWall();
-        }
-
         if (collision.tag == "Enemy")
         {
             ExplodePotionEnemy(collision.GetComponent<HealthController>(), collision);     
@@ -92,7 +89,7 @@ public class PotionExplodeScript : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Wall")
+        if (collision.tag == "Wall" && _throwed)
         {
             ExplodePotionWall();
         }
@@ -103,19 +100,11 @@ public class PotionExplodeScript : MonoBehaviour
         }
     }
 
-    public void DestroyPotion(float time)
+    public IEnumerator DestroyPotion(float time)
     {
-        if (_canPlayAnim >= 2)
-        {
-            _exploded = true;
-        }
-        else
-        {
-            _canPlayAnim++;
-        }
+        if (_throwed) {
+            yield return new WaitForSeconds(time);
 
-        if (!_exploded)
-        {
             switch (_item._itemType)
             {
                 default:
@@ -131,14 +120,14 @@ public class PotionExplodeScript : MonoBehaviour
                     Instantiate(_potionExplodeHealing, transform.position, Quaternion.identity);
                     break;
             }
-        }
 
-        Destroy(transform.parent.gameObject, time);
+            Destroy(transform.parent.gameObject);
+        }
     }
 
     public void DefaultCrashPotion()
     {
-        DestroyPotion(_timeToDestroy);
+        StartCoroutine(DestroyPotion(_timeToDestroy));
     }
     
     public void SetItem(Item item)

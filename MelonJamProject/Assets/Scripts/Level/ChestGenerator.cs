@@ -12,9 +12,9 @@ public class ChestGenerator : MonoBehaviour
         instance = this;
     }
 
-    public void Generate(List<Room> generatedRooms) {
+    public void Generate(List<Room> generatedRooms, float multiplier) {
         foreach (Room room in generatedRooms) {
-            for (int i = 0; i < Random.Range(1, 3); i++) {
+            for (int i = 0; i < Random.Range(1 * multiplier, 3 * (multiplier-0.5f)); i++) {
                 GameObject obj = Instantiate(chestPrefab, room.transform);
                 obj.transform.localPosition = new Vector2(Random.Range((-room.sizes.x+2)/2, (room.sizes.x-2)/2), Random.Range((-room.sizes.y+2)/2, (room.sizes.y-2)/2));
             }

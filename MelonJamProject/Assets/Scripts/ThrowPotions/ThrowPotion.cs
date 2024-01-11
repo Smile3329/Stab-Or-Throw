@@ -62,6 +62,7 @@ public class ThrowPotion : MonoBehaviour
 
     public void throwPotion(float throwForce)
     {
+        
         GetComponent<SoundManager>().ThrowPotion();
 
         _potionAim = false;
@@ -71,7 +72,7 @@ public class ThrowPotion : MonoBehaviour
         //_spawnedPotionGameObject.GetComponent<Rigidbody2D>().velocity = _spawnedPotionGameObject.transform.up * throwForce;
 
         _spawnedPotionGameObject.GetComponent<Rigidbody2D>().AddForce(_spawnedPotionGameObject.transform.up * throwForce, ForceMode2D.Impulse);
-        _spawnedPotionGameObject.GetComponent<Rigidbody2D>().AddTorque(5);
+        _spawnedPotionGameObject.GetComponent<Rigidbody2D>().AddTorque(10);
 
         _spawnedPotionGameObject.transform.GetChild(1).GetComponent<Collider2D>().enabled = true;
 
